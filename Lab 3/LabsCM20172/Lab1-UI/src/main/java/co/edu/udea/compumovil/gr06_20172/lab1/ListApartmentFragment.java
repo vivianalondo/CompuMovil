@@ -63,6 +63,7 @@ public class ListApartmentFragment extends Fragment {
         }
     }
 
+
     /**
      * Adapter to display recycler view.
      */
@@ -77,7 +78,6 @@ public class ListApartmentFragment extends Fragment {
         ArrayList<String> mPlaces = new ArrayList(), mPlaceDesc = new ArrayList();
         ArrayList avat = new ArrayList();
         boolean control=false;
-
 
         public ContentAdapter(Context context) {
             Resources resources = context.getResources();
@@ -104,6 +104,7 @@ public class ListApartmentFragment extends Fragment {
             }
 
         }
+
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
