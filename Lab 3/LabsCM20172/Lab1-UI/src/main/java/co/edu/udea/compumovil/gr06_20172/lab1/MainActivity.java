@@ -88,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
                             case R.id.apart:
-                                Toast.makeText(getApplicationContext(),"Apartment list",Toast.LENGTH_SHORT).show();
-                                //ApartmentFragment fragment3 = new ApartmentFragment();
+                                //Toast.makeText(getApplicationContext(),"Apartment list",Toast.LENGTH_SHORT).show();
                                 ListApartmentFragment fragment3 = new ListApartmentFragment();
                                 FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction3.replace(R.id.fragment_container,fragment3);
                                 fragmentTransaction3.commit();
-                                //fab.setVisibility(View.VISIBLE);
+                                //Intent aptActivity = new Intent(MainActivity.this, ApartmentsActivity.class);
+                                //startActivity(aptActivity);
                                 return true;
                             case R.id.edit:
                                 //Toast.makeText(getApplicationContext(),"Edit Selected",Toast.LENGTH_SHORT).show();
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.setting:
                                 Intent settingActivity = new Intent(MainActivity.this, SettingsActivity.class);
                                 startActivity(settingActivity);
-                                finish();
+                                //finish();
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
 

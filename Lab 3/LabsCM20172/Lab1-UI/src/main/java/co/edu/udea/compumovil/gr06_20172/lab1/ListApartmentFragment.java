@@ -1,12 +1,5 @@
 package co.edu.udea.compumovil.gr06_20172.lab1;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,11 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.Apartment;
+import co.edu.udea.compumovil.gr06_20172.lab1.adapter.ApartmentsAdapter;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ListApartmentFragment extends Fragment {
@@ -28,16 +26,34 @@ public class ListApartmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
-        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        final RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
+        // ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
+        //recyclerView.setAdapter(adapter);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<List<Apartment>> call = apiService.getData();
+
+        call.enqueue(new Callback<List<Apartment>>() {
+            @Override
+            public void onResponse(Call<List<Apartment>> call1, Response<List<Apartment>> response) {
+
+                List<Apartment> apartments = response.body();
+                recyclerView.setAdapter(new ApartmentsAdapter(apartments, R.layout.list_item_apartment, getContext()));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Apartment>> call1, Throwable t) {
+
+                Log.e("Error", "Hay un error en el call apartment");
+            }
+        });
         return recyclerView;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    /*public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView avator;
         public TextView name;
         public TextView description;
@@ -61,18 +77,22 @@ public class ListApartmentFragment extends Fragment {
                 }
             });
         }
-    }
+    }*/
 
 
     /**
      * Adapter to display recycler view.
-     */
+
     public class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         // Set numbers of List in RecyclerView.
         int LENGTH = 0;
         DbHelper dbHelper;
         SQLiteDatabase db;
         View view;
+
+        //codigo nuevo hasta el espacio
+        private List<Apartment> apartments;
+        private int rowLayout;
 
         private final Bitmap[] mPlaceAvators;
         ArrayList<String> mPlaces = new ArrayList(), mPlaceDesc = new ArrayList();
@@ -121,5 +141,5 @@ public class ListApartmentFragment extends Fragment {
         public int getItemCount() {
             return LENGTH;
         }
-    }
+    }*/
 }

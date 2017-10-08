@@ -1,15 +1,19 @@
 package co.edu.udea.compumovil.gr06_20172.lab1;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.Apartment;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
     DbHelper dbHelper;
@@ -30,40 +34,42 @@ public class DetailActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra(EXTRA_NOMBRE);
 
-        dbHelper =new DbHelper(this);
-        db= dbHelper.getReadableDatabase();
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Cursor search = db.rawQuery("select * from " + StatusContract.TABLE_LOGIN, null);
+        Call <Apartment> call = apiService.getApartmentDetails(Integer.parseInt(name));
 
-        search.moveToFirst();
-        search=db.rawQuery("select * from "+StatusContract.TABLE_APARTMENT+" where "+ StatusContract.Column_User.NAME+"='"+name+"'", null);
-        search.moveToFirst();
+        call.enqueue(new Callback<Apartment>() {
+            @Override
+            public void onResponse(Call<Apartment> call, Response<Apartment> response) {
+                Apartment apartment = response.body();
+                TextView placeType = (TextView) findViewById(R.id.place_type);
+                placeType.setText(apartment.getApType());
+                TextView placeDetail = (TextView) findViewById(R.id.place_detail);
+                placeDetail.setText(apartment.getDescription());
 
-        collapsingToolbar.setTitle(search.getString(1));
+                TextView placeArea = (TextView) findViewById(R.id.place_area);
+                placeArea.setText(apartment.getArea().toString());
 
-        collapsingToolbar.setTitle(search.getString(1));
+                TextView placeLocation =  (TextView) findViewById(R.id.place_location);
+                placeLocation.setText(apartment.getAddress());
 
-        TextView placeType = (TextView) findViewById(R.id.place_type);
-        placeType.setText(search.getString(2));
+                TextView placeValues =  (TextView) findViewById(R.id.place_value);
+                placeValues.setText(apartment.getValue().toString());
 
-        TextView placeDetail = (TextView) findViewById(R.id.place_detail);
-        placeDetail.setText(search.getString(3));
+                ImageView placePictures = (ImageView) findViewById(R.id.image);
 
-        TextView placeArea = (TextView) findViewById(R.id.place_area);
-        placeArea.setText(search.getString(4));
+                /*byte[] auxx=search.getBlob(7);
+                Bitmap pict= BitmapFactory.decodeByteArray(auxx, 0, (auxx).length);
+                placePictures.setImageBitmap(pict);*/
 
-        TextView placeLocation =  (TextView) findViewById(R.id.place_location);
-        placeLocation.setText(search.getString(5));
+            }
 
-        TextView placeValues =  (TextView) findViewById(R.id.place_value);
-        placeValues.setText(search.getString(6));
+            @Override
+            public void onFailure(Call<Apartment> call, Throwable t) {
 
-        ImageView placePictures = (ImageView) findViewById(R.id.image);
+            }
+        });
 
-        byte[] auxx=search.getBlob(7);
-        Bitmap pict= BitmapFactory.decodeByteArray(auxx, 0, (auxx).length);
-        placePictures.setImageBitmap(pict);
-        db.close();
 
     }
 }
