@@ -26,7 +26,7 @@
     <string name="invalid_mail">El correo no es válido</string>
     <string name="pass_no_equals">Las contraseñas no coinciden</string>
     <string name="user_exists">El usuario ya existe</string>
-    <string name="info">Información</string>
+    <string name="info">Perfil</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="mensaje_edicion">Se ha modificado el registro</string>

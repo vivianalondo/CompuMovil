@@ -94,6 +94,12 @@ public class AddApartmentFragment extends Fragment {
             }
         }
     }
+
+    /**
+     * Método para verificar vacíos
+     * @param txtValidate
+     * @return
+     */
     public boolean verificarVaciosSinMessageR(EditText[] txtValidate)
     {
         for(int i=0; i<txtValidate.length;i++)
@@ -105,12 +111,25 @@ public class AddApartmentFragment extends Fragment {
         }
         return true;
     }
+
+    /**
+     * Método para obtener array de bytes de la imagen
+     * @param bitmap
+     * @return
+     */
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
+
+    /**
+     * Métodos para validar los apartamentos que están en la base de datos
+     */
     public void ValidarApartamentos() {//valida los apartamentos, que ya esten en la BD
+
+
+
         db = dbH.getWritableDatabase();
         ContentValues values = new ContentValues();
         Cursor search = db.rawQuery("select count(*) from " + StatusContract.TABLE_APARTMENT, null);
@@ -129,11 +148,23 @@ public class AddApartmentFragment extends Fragment {
         db.insertWithOnConflict(StatusContract.TABLE_APARTMENT, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
     }
+
+    /**
+     * Método para abrir la galería
+     */
     public void ClickGalleryR() {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_CODE_GALLERY);
     }
+
+    /**
+     * Método para redimensionar imagen
+     * @param mBitmap
+     * @param newWidth
+     * @param newHeigth
+     * @return
+     */
     public Bitmap redimensionarImagenMaximo(Bitmap mBitmap, float newWidth, float newHeigth){
         int width = mBitmap.getWidth();
         int height = mBitmap.getHeight();

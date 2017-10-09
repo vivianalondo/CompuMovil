@@ -26,7 +26,7 @@
     <string name="invalid_mail">Email is not valid</string>
     <string name="pass_no_equals">Passwords do not match</string>
     <string name="user_exists">User already exists</string>
-    <string name="info">Information</string>
+    <string name="info">Profile</string>
     <string name="mensaje_edicion">Registry has been updated</string>
 
     <string-array name="cities_array">

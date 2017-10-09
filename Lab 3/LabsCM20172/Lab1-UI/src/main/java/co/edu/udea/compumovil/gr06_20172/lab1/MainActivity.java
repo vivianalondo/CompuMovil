@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity {
     //declaracion de variables globes
     DbHelper dbHelper;
@@ -51,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        InformationFragment fragment = new InformationFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        ListApartmentFragment fragment = new ListApartmentFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
+
 
         // Set behavior of Navigation drawer
         navigationView.setNavigationItemSelectedListener(
@@ -80,13 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction.commit();
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
-                            case R.id.about:
-                                AboutFragment fragment2 = new AboutFragment();
-                                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction2.replace(R.id.fragment_container,fragment2);
-                                fragmentTransaction2.commit();
-                                //fab.setVisibility(View.INVISIBLE);
-                                return true;
+
                             case R.id.apart:
                                 //Toast.makeText(getApplicationContext(),"Apartment list",Toast.LENGTH_SHORT).show();
                                 ListApartmentFragment fragment3 = new ListApartmentFragment();
@@ -102,13 +99,6 @@ public class MainActivity extends AppCompatActivity {
                                 FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction1.replace(R.id.fragment_container,fragment1);
                                 fragmentTransaction1.commit();
-                                //fab.setVisibility(View.INVISIBLE);
-                                return true;
-                            case R.id.notification:
-                                NotificationFragment fragment4 = new NotificationFragment();
-                                FragmentTransaction fragmentTransaction4 = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction4.replace(R.id.fragment_container,fragment4);
-                                fragmentTransaction4.commit();
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
 
@@ -177,14 +167,13 @@ public class MainActivity extends AppCompatActivity {
         apar.searchApartments();
     }
 
-    public void otroApartamento(View v){
+    public void otroApartamento(View v) throws JSONException {
         add.ValidarApartamentos();
         Toast.makeText(getApplicationContext(),"Apartment list",Toast.LENGTH_SHORT).show();
-        ApartmentFragment fragment3 = new ApartmentFragment();
+        ListApartmentFragment fragment3 = new ListApartmentFragment();
         FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
         fragmentTransaction3.replace(R.id.fragment_container,fragment3);
         fragmentTransaction3.commit();
-        //fab.setVisibility(View.VISIBLE);
     }
     public void viewMaps(View v) {
         /*map = (Button) apar.getView().findViewById(R.id.viewMap);

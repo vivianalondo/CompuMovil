@@ -1,9 +1,7 @@
 package co.edu.udea.compumovil.gr06_20172.lab1;
 
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.Apartment;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -94,6 +102,12 @@ public class AddApartmentFragment extends Fragment {
             }
         }
     }
+
+    /**
+     * Método para verificar vacíos
+     * @param txtValidate
+     * @return
+     */
     public boolean verificarVaciosSinMessageR(EditText[] txtValidate)
     {
         for(int i=0; i<txtValidate.length;i++)
@@ -105,13 +119,25 @@ public class AddApartmentFragment extends Fragment {
         }
         return true;
     }
+
+    /**
+     * Convertir imagen a un array de bytes
+     * @param bitmap
+     * @return
+     */
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
+
+    /**
+     * Método para crear un nuevo apartamento
+     * @throws JSONException
+     */
     public void ValidarApartamentos() {//valida los apartamentos, que ya esten en la BD
-        db = dbH.getWritableDatabase();
+
+        /*db = dbH.getWritableDatabase();
         ContentValues values = new ContentValues();
         Cursor search = db.rawQuery("select count(*) from " + StatusContract.TABLE_APARTMENT, null);
         search.moveToFirst();
@@ -127,13 +153,55 @@ public class AddApartmentFragment extends Fragment {
         search.moveToFirst();
         values.put(StatusContract.Column_Apartment.PICTURE,getBitmapAsByteArray(pict));
         db.insertWithOnConflict(StatusContract.TABLE_APARTMENT, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-        db.close();
+        db.close();*/
+
+        int user_id = 1;
+        String name = txtValidateR[0].getText().toString();
+        String ap_type = txtValidateR[1].getText().toString();
+        String description = txtValidateR[2].getText().toString();
+        int area = Integer.parseInt(txtValidateR[3].getText().toString());
+        int value = Integer.parseInt(txtValidateR[5].getText().toString());
+        String address = txtValidateR[4].getText().toString();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Apartment apartment = new Apartment(user_id, name ,ap_type, description, area, value, address);
+        Call<Apartment> call = apiService.createApartment(apartment);
+        call.enqueue(new Callback<Apartment>() {
+            @Override
+            public void onResponse(Call<Apartment> call, Response<Apartment> response) {
+
+                if(response.isSuccessful()) {
+                    System.out.println(response.body().toString());
+                    Log.i("TAG", "post submitted to API." + response.body().toString());
+                }else{
+                    System.out.println("Respuesta post no exitosa");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Apartment> call, Throwable t) {
+                Log.e("TAG", "Unable to submit post to API.");
+            }
+        });
+
     }
+
+    /**
+     * Método para abrir la galería
+     */
     public void ClickGalleryR() {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_CODE_GALLERY);
     }
+
+    /**
+     * Método para redimensionar imagen
+     * @param mBitmap
+     * @param newWidth
+     * @param newHeigth
+     * @return
+     */
     public Bitmap redimensionarImagenMaximo(Bitmap mBitmap, float newWidth, float newHeigth){
         int width = mBitmap.getWidth();
         int height = mBitmap.getHeight();

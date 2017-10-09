@@ -117,4 +117,21 @@ public class Apartment {
         this.updatedAt = updatedAt;
     }
 
+    public Apartment(){
+
+    }
+
+    public Apartment(int userId, String name, String apType, String description,
+                     int area, int value, String address){
+
+        this.userId = userId;
+        this.name = name;
+        this. apType = apType;
+        this.description = description;
+        this.area = area;
+        this.value = value;
+        this.address = address;
+
+    }
+
 }
