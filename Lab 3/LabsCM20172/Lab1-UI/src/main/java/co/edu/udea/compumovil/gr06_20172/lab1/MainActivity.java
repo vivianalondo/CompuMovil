@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean controlSelect=false;
     private DrawerLayout mDrawerLayout;
     Button map;
+    public static final String EXTRA_EMAIL = "emailE";
+    public static final String EXTRA_PASS = "passE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                                 InformationFragment fragment = new InformationFragment();
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment_container,fragment);
+                                Bundle args = new Bundle();
+                                args.putString("myString", getIntent().getExtras().getString(EXTRA_EMAIL));
+                                args.putString("myString", getIntent().getExtras().getString(EXTRA_PASS));
+                                //fragmentTransaction.set
                                 fragmentTransaction.commit();
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
@@ -93,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
                                 //Intent aptActivity = new Intent(MainActivity.this, ApartmentsActivity.class);
                                 //startActivity(aptActivity);
                                 return true;
-                            case R.id.edit:
+                            /*case R.id.edit:
                                 //Toast.makeText(getApplicationContext(),"Edit Selected",Toast.LENGTH_SHORT).show();
                                 EditFragment fragment1 = new EditFragment();
                                 FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction1.replace(R.id.fragment_container,fragment1);
                                 fragmentTransaction1.commit();
                                 //fab.setVisibility(View.INVISIBLE);
-                                return true;
+                                return true;*/
 
                             case R.id.setting:
                                 Intent settingActivity = new Intent(MainActivity.this, SettingsActivity.class);

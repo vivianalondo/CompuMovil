@@ -89,16 +89,7 @@ public class ApartmentsAdapter extends RecyclerView.Adapter<ApartmentsAdapter.Ap
         Bitmap[] mPlaceAvators;
         byte[] avat = new byte[0];
         mPlaceAvators = new Bitmap[apartments.size()];
-        /*for (int i = 0; i < mPlaceAvators.length; i++) {
-            if (apartments.get(position).getPicture().getBytes()!=null){
-                avat = apartments.get(position).getPicture().getBytes();
-                mPlaceAvators[i] = BitmapFactory.decodeByteArray(avat, 0, (avat).length);
-            }
-            else{
-                mPlaceAvators[i] = null;
-            }
-        }*/
-        //holder.avator.setImageBitmap(mPlaceAvators[position % mPlaceAvators.length]);
+
         System.out.println("Valor de picture: "+apartments.get(position).getPicture());
         if (apartments.get(position).getPicture()!=null){
             System.out.println("Valor de picture: "+apartments.get(position).getPicture());

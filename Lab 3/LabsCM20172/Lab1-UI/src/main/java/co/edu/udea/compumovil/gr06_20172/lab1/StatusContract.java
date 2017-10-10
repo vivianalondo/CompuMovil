@@ -8,14 +8,20 @@ import android.provider.BaseColumns;
 public class StatusContract {
 
     public static final String DB_NAME = "lab1.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
     public static final String TABLE_USER= "usuario";
     public static final String TABLE_LOGIN="logeado";
     public static final String TABLE_APARTMENT="apartamento";
+    public static final String TABLE_KEEP="apartamento";
 
     public class Column_Login {
         public static final String ID = BaseColumns._ID;
         public static final String EMAIL = "email";
+        public static final String PASS = "pass";
+    }
+    public class Column_keep {
+        public static final String ID = BaseColumns._ID;
+        public static final String KEEP = "keep";
     }
     public class Column_User {
         public static final String ID = BaseColumns._ID;

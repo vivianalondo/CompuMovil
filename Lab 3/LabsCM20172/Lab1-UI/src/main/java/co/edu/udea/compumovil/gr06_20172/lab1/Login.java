@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class Login extends AppCompatActivity {
     private boolean isActivateRadioButton;
     private static final String STRING_PREFERENCES = "co.edu.udea.compumovil.gr06_20172.lab1";
     private static final String PREFERENCES_STATE_BUTTON_SESION = "state.button.sesion";
+    private Session session;
+    private Button btnIngresar;
 
     @Override
     protected void onResume(){
@@ -54,6 +57,8 @@ public class Login extends AppCompatActivity {
         passwordView = (EditText) findViewById(R.id.txtLoginPassword);
         //rbSesion = (RadioButton) findViewById(R.id.rbSesion);
         dbHelper = new DbHelper(this);
+        session = new Session(this);
+        btnIngresar = (Button) findViewById(R.id.btnIngresar);
 
         /*isActivateRadioButton = rbSesion.isChecked();//Desactivado
 
@@ -68,6 +73,27 @@ public class Login extends AppCompatActivity {
             }
 
         });*/
+
+        if (session.loggedin()&& dbHelper.mantener()){
+            //session.setLoggedin(true,db.get);
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();
+        }else if (!dbHelper.mantener()){
+            session.logout();
+        }
+
+        btnIngresar.setOnClickListener(new View.OnClickListener(){
+            //Activado
+            @Override
+            public void onClick(View v) {
+                try {
+                    sigInLogin(v);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
     }
 
     /*public void saveStateButton(){
@@ -150,11 +176,14 @@ public class Login extends AppCompatActivity {
     private void register() throws InterruptedException{
         db = dbHelper.getWritableDatabase();
         final ContentValues values = new ContentValues();
-        values.put(StatusContract.Column_Login.ID,(1));
-        values.put(StatusContract.Column_Login.EMAIL, emailView.getText().toString());
 
-        String email = emailView.getText().toString();
-        String pass = passwordView.getText().toString();
+
+        final String email = emailView.getText().toString();
+        final String pass = passwordView.getText().toString();
+
+        values.put(StatusContract.Column_Login.ID,(1));
+        values.put(StatusContract.Column_Login.EMAIL, email);
+        values.put(StatusContract.Column_Login.PASS, pass);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<User> call = apiService.loginPost(email, pass);
@@ -169,9 +198,14 @@ public class Login extends AppCompatActivity {
                     Log.i("TAG", "post submitted to API." + response.body().toString());
                     Log.d("tag",emailView.getText().toString());
                     db.insertWithOnConflict(StatusContract.TABLE_LOGIN, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+                    session.setLoggedin(true,response.body());
                     db.close();
-                    //saveStateButton();
+
                     Intent newActivity = new Intent(Login.this, MainActivity.class);
+                    newActivity.putExtra(MainActivity.EXTRA_EMAIL, email);
+                    newActivity.putExtra(MainActivity.EXTRA_PASS, pass);
+                    Log.d("TAGO",  email);
+
                     startActivity(newActivity);
                     finish();
                 }else{

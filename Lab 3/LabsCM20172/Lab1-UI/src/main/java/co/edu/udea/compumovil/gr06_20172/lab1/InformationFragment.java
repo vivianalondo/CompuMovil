@@ -1,17 +1,24 @@
 package co.edu.udea.compumovil.gr06_20172.lab1;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.User;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Viviana Londoño on 24/08/2017.
@@ -27,6 +34,11 @@ public class InformationFragment extends Fragment {
     SQLiteDatabase db;
     TextView[] txtValidateR = new TextView[8];
     View view;
+    public static final String EXTRA_EMAIL = "emailE";
+    public static final String EXTRA_PASS = "passE";
+    byte[] avat = new byte[0];
+
+
 
     public InformationFragment() {//activity que enseña información
 
@@ -48,27 +60,53 @@ public class InformationFragment extends Fragment {
         txtValidateR[6]=(TextView)view.findViewById(R.id.viewAddress);
         txtValidateR[7]=(TextView)view.findViewById(R.id.viewCity);
         targetImageR=(ImageView)view.findViewById(R.id.viewProfile);
-        db= dbHelper.getWritableDatabase();
-        Cursor search = db.rawQuery("select * from " + StatusContract.TABLE_LOGIN, null);
 
-        search.moveToFirst();
-        String aux = search.getString(1);
-        Log.d("tag",aux);
-        search = db.rawQuery("select * from "+StatusContract.TABLE_USER+ " where "+StatusContract.Column_User.MAIL+"='"+aux+"'", null);
-        search.moveToFirst();
-        Log.d("prueba",search.getString(1));
-        txtValidateR[0].setText("Nombre: "+search.getString(2));
-        txtValidateR[1].setText("Apellido: "+search.getString(3));
-        txtValidateR[2].setText("E-mail:"+search.getString(1));
-        txtValidateR[3].setText("Género:"+search.getString(4));
-        txtValidateR[4].setText("Fecha de nacimiento:"+search.getString(5));
-        txtValidateR[5].setText("Teléfono:"+search.getString(6));
-        txtValidateR[6].setText("Dirección:"+search.getString(7));
-        txtValidateR[7].setText("Ciudad:"+search.getString(9));
-        byte[] auxx=search.getBlob(10);
-        Bitmap pict= BitmapFactory.decodeByteArray(auxx, 0, (auxx).length);
-        targetImageR.setImageBitmap(pict);
-        db.close();
+        String str = getActivity().getIntent().getStringExtra("myString");
+        String emailEx = getActivity().getIntent().getStringExtra(EXTRA_EMAIL);
+        String passEx = getActivity().getIntent().getStringExtra(EXTRA_PASS);
+
+        System.out.println("Extra email: "+ emailEx);
+        System.out.println("Extra pass: "+ passEx);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<User> call = apiService.loginPost(emailEx, passEx);
+
+        System.out.println("El usuario y contrasela son: "+emailEx+ passEx);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+                    User user = response.body();
+                    System.out.println(response.body().toString());
+                    Log.i("TAG", "post submitted to API." + response.body().toString());
+                    txtValidateR[0].setText("Nombre: "+user.getName());
+                    txtValidateR[1].setText("Apellido: "+user.getLastName());
+                    txtValidateR[2].setText("E-mail:"+user.getEmail());
+                    txtValidateR[3].setText("Género:"+user.getGender());
+                    txtValidateR[4].setText("Fecha de nacimiento:"+user.getDate());
+                    txtValidateR[5].setText("Teléfono:"+user.getPhone());
+                    txtValidateR[6].setText("Dirección:"+user.getAddress());
+                    txtValidateR[7].setText("Ciudad:"+user.getCity());
+
+                    avat = user.getPicture().getBytes();
+                    byte[] decodedString = Base64.decode(avat, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    //Bitmap bitmap = BitmapFactory.decodeByteArray(avat, 0, avat.length);
+                    targetImageR.setImageBitmap(decodedByte);
+
+                }else{
+                    System.out.println("Respuesta post no exitosa");
+                    System.out.println(response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                call.cancel();
+            }
+        });
+
+
         return view;
     }
 }
