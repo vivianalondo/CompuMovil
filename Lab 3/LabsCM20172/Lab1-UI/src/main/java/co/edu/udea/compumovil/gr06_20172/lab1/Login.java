@@ -45,10 +45,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         emailView = (AutoCompleteTextView) findViewById(R.id.txtLoginEmail);
         passwordView = (EditText) findViewById(R.id.txtLoginPassword);
-        rbSesion = (RadioButton) findViewById(R.id.rbSesion);
+        //rbSesion = (RadioButton) findViewById(R.id.rbSesion);
         dbHelper = new DbHelper(this);
 
-        isActivateRadioButton = rbSesion.isChecked();//Desactivado
+        /*isActivateRadioButton = rbSesion.isChecked();//Desactivado
 
         rbSesion.setOnClickListener(new View.OnClickListener(){
             //Activado
@@ -60,13 +60,13 @@ public class Login extends AppCompatActivity {
                 isActivateRadioButton = rbSesion.isChecked();
             }
 
-        });
+        });*/
     }
 
-    public void saveStateButton(){
+    /*public void saveStateButton(){
         SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
         preferences.edit().putBoolean(PREFERENCES_STATE_BUTTON_SESION,rbSesion.isChecked()).apply();
-    }
+    }*/
 
     public boolean geteStateButton(){
         SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
@@ -119,7 +119,7 @@ public class Login extends AppCompatActivity {
         if (cancel){
             focusView.requestFocus();
         }else {
-            saveStateButton();
+            //saveStateButton();
             saveLoginSharedPrferences(email);
             register();
         }
@@ -148,7 +148,7 @@ public class Login extends AppCompatActivity {
         Log.d("tag",emailView.getText().toString());
         db.insertWithOnConflict(StatusContract.TABLE_LOGIN, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
-        saveStateButton();
+        //saveStateButton();
         Intent newActivity = new Intent(this, MainActivity.class);
         startActivity(newActivity);
         finish();

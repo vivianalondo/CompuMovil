@@ -161,5 +161,7 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="settings">Configuración</string>
+    <string name="preferencesSesion">Manterner sesion</string>
+    <string name="preferencesSesionDescription">Active esta opción para mantener la sesión iniciada</string>
 
 </resources>

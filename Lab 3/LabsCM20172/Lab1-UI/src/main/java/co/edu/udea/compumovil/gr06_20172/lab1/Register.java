@@ -2,7 +2,6 @@ package co.edu.udea.compumovil.gr06_20172.lab1;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +27,13 @@ import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.User;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -137,7 +143,46 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
             if (!txtValidate[2].getText().toString().equals(txtValidate[1].getText().toString())){
                 txtValidate[2].setError(getString(R.string.pass_no_equals));
                 focusView = txtValidate[2];
-            }else if(!existEmail(txtValidate[0].getText().toString())){
+            }else{
+
+                String email = txtValidate[0].getText().toString();
+                String pass = txtValidate[1].getText().toString();
+                String name = txtValidate[3].getText().toString();
+                String lastname = txtValidate[4].getText().toString();
+                String date = txtValidate[5].getText().toString();
+                String phone = txtValidate[6].getText().toString();
+                String address = txtValidate[7].getText().toString();
+                String city = txtValidate[8].getText().toString();
+                String gender = optionSelect;
+                //values.put(StatusContract.Column_User.PICTURE, getBitmapAsByteArray(picture));
+
+                //Llamado a la api, para registrar usuario en DB externa
+                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                User user = new User();
+                Call<User> call = apiService.createUser(user);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                        if(response.isSuccessful()) {
+                            System.out.println(response.body().toString());
+                            Log.i("TAG", "post submitted to API." + response.body().toString());
+                        }else{
+                            System.out.println("Respuesta post no exitosa");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Log.e("TAG", "Unable to submit post to API.");
+                    }
+                });
+            }
+
+
+
+
+            /*else if(!existEmail(txtValidate[0].getText().toString())){
                 db = dbH.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 Cursor search = db.rawQuery("select count(*) from usuario", null);
@@ -163,7 +208,7 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
             {
                 txtValidate[0].setError(getString(R.string.user_exists));
                 focusView = txtValidate[0];
-            }
+            }*/
         }
 
     }

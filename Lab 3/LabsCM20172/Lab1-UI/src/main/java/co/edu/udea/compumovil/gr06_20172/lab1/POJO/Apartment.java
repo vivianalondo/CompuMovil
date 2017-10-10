@@ -23,10 +23,10 @@ public class Apartment {
     private String description;
     @SerializedName("area")
     @Expose
-    private Integer area;
+    private Float area;
     @SerializedName("value")
     @Expose
-    private Integer value;
+    private Float value;
     @SerializedName("address")
     @Expose
     private String address;
@@ -36,6 +36,10 @@ public class Apartment {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
+    @SerializedName("picture")
+    @Expose
+    private String picture;
 
     public Integer getId() {
         return id;
@@ -77,19 +81,19 @@ public class Apartment {
         this.description = description;
     }
 
-    public Integer getArea() {
+    public Float getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(Float area) {
         this.area = area;
     }
 
-    public Integer getValue() {
+    public Float getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Float value) {
         this.value = value;
     }
 
@@ -117,12 +121,20 @@ public class Apartment {
         this.updatedAt = updatedAt;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     public Apartment(){
 
     }
 
     public Apartment(int userId, String name, String apType, String description,
-                     int area, int value, String address){
+                     Float area, Float value, String address, String picture){
 
         this.userId = userId;
         this.name = name;
@@ -131,6 +143,7 @@ public class Apartment {
         this.area = area;
         this.value = value;
         this.address = address;
+        this.picture = picture;
 
     }
 

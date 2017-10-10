@@ -27,13 +27,10 @@ public class ListApartmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
-        // ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
-        //recyclerView.setAdapter(adapter);
 
+        //Llamado a la api
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
         Call<List<Apartment>> call = apiService.getData();
-
         call.enqueue(new Callback<List<Apartment>>() {
             @Override
             public void onResponse(Call<List<Apartment>> call1, Response<List<Apartment>> response) {
