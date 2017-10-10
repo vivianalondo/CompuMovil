@@ -35,19 +35,22 @@ public class MainActivity extends AppCompatActivity {
     Button map;
     public static final String EXTRA_EMAIL = "emailE";
     public static final String EXTRA_PASS = "passE";
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbHelper =new DbHelper(this);//nueva base de datos
-
+        session = new Session(this);
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                 args.putString("myString", getIntent().getExtras().getString(EXTRA_PASS));
                                 //fragmentTransaction.set
                                 fragmentTransaction.commit();
-                                //fab.setVisibility(View.INVISIBLE);
+                                fab.setVisibility(View.INVISIBLE);
                                 return true;
 
                             case R.id.apart:
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                 db.execSQL("delete from " + StatusContract.TABLE_LOGIN);
                                 db.close();
                                 //Toast.makeText(getApplicationContext(),"Exit Selected",Toast.LENGTH_SHORT).show();
+                                session.logout();
                                 Intent newActivity = new Intent(MainActivity.this, Login.class);
                                 startActivity(newActivity);
                                 finish();

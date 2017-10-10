@@ -42,6 +42,9 @@ public class Login extends AppCompatActivity {
     private Session session;
     private Button btnIngresar;
 
+    private String email;
+    private String password;
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -60,23 +63,13 @@ public class Login extends AppCompatActivity {
         session = new Session(this);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
 
-        /*isActivateRadioButton = rbSesion.isChecked();//Desactivado
-
-        rbSesion.setOnClickListener(new View.OnClickListener(){
-            //Activado
-            @Override
-            public void onClick(View v) {
-                if (isActivateRadioButton){
-                    rbSesion.setChecked(false);
-                }
-                isActivateRadioButton = rbSesion.isChecked();
-            }
-
-        });*/
 
         if (session.loggedin()&& dbHelper.mantener()){
             //session.setLoggedin(true,db.get);
-            startActivity(new Intent(Login.this, MainActivity.class));
+            Intent newActivity = new Intent(Login.this, MainActivity.class);
+            newActivity.putExtra(MainActivity.EXTRA_EMAIL, email);
+            newActivity.putExtra(MainActivity.EXTRA_PASS, password);
+            startActivity(newActivity);
             finish();
         }else if (!dbHelper.mantener()){
             session.logout();
@@ -132,8 +125,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void sigInLogin(View v) throws InterruptedException{
-        String email = emailView.getText().toString();
-        String password = passwordView.getText().toString();
+        email = emailView.getText().toString();
+        password = passwordView.getText().toString();
         boolean cancel = false;
         View focusView = null;
         if (TextUtils.isEmpty(email)){
@@ -178,17 +171,17 @@ public class Login extends AppCompatActivity {
         final ContentValues values = new ContentValues();
 
 
-        final String email = emailView.getText().toString();
-        final String pass = passwordView.getText().toString();
+        email = emailView.getText().toString();
+        password = passwordView.getText().toString();
 
         values.put(StatusContract.Column_Login.ID,(1));
         values.put(StatusContract.Column_Login.EMAIL, email);
-        values.put(StatusContract.Column_Login.PASS, pass);
+        values.put(StatusContract.Column_Login.PASS, password);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<User> call = apiService.loginPost(email, pass);
+        Call<User> call = apiService.loginPost(email, password);
 
-        System.out.println("El usuario y contrasela son: "+email+ pass);
+        System.out.println("El usuario y contrasela son: "+email+ password);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -203,7 +196,7 @@ public class Login extends AppCompatActivity {
 
                     Intent newActivity = new Intent(Login.this, MainActivity.class);
                     newActivity.putExtra(MainActivity.EXTRA_EMAIL, email);
-                    newActivity.putExtra(MainActivity.EXTRA_PASS, pass);
+                    newActivity.putExtra(MainActivity.EXTRA_PASS, password);
                     Log.d("TAGO",  email);
 
                     startActivity(newActivity);
