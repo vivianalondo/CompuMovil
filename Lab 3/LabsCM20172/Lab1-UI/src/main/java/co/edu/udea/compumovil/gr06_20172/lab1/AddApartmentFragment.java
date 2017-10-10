@@ -171,9 +171,7 @@ public class AddApartmentFragment extends Fragment {
         String imgString = Base64.encodeToString(getBitmapAsByteArray(pict),
                 Base64.NO_WRAP);
 
-        System.out.println("El arreglo de img: "+ getBitmapAsByteArray(pict));
-        System.out.println("El arreglo de img en string: "+ getBitmapAsByteArray(pict).toString());
-        System.out.println("La variable picture vale: "+ imgString);
+
         //values.put(StatusContract.Column_Apartment.PICTURE,getBitmapAsByteArray(pict));
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

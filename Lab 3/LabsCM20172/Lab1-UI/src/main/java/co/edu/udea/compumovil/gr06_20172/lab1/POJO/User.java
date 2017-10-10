@@ -1,4 +1,3 @@
-
 package co.edu.udea.compumovil.gr06_20172.lab1.POJO;
 
 import com.google.gson.annotations.Expose;
@@ -17,25 +16,28 @@ public class User {
     private String name;
     @SerializedName("last_name")
     @Expose
-    private Object lastName;
+    private String lastName;
     @SerializedName("gender")
     @Expose
-    private Object gender;
+    private String gender;
     @SerializedName("date")
     @Expose
-    private Object date;
+    private String date;
     @SerializedName("address")
     @Expose
-    private Object address;
+    private String address;
     @SerializedName("pass")
     @Expose
-    private Object pass;
+    private String pass;
     @SerializedName("city")
     @Expose
     private String city;
     @SerializedName("phone")
     @Expose
-    private Object phone;
+    private String phone;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -67,43 +69,43 @@ public class User {
         this.name = name;
     }
 
-    public Object getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(Object lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public Object getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Object gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public Object getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Object date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Object getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Object address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public Object getPass() {
+    public String getPass() {
         return pass;
     }
 
-    public void setPass(Object pass) {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 
@@ -115,12 +117,20 @@ public class User {
         this.city = city;
     }
 
-    public Object getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Object phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getCreatedAt() {
@@ -144,8 +154,8 @@ public class User {
     }
 
     //Constructor con datos
-    public User(String email, String name, Object lastName, Object gender, Object date,
-                Object address, Object pass, String city, Object phone) {
+    public User(String email, String name, String lastName, String gender, String date,
+                String address, String pass, String city, String phone, String picture) {
         this.email = email;
         this.name = name;
         this.lastName = lastName;
@@ -155,5 +165,6 @@ public class User {
         this.pass = pass;
         this.city = city;
         this.phone = phone;
+        this.picture = picture;
     }
 }

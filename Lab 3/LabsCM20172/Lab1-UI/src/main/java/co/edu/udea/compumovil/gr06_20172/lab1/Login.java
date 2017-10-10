@@ -16,6 +16,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import co.edu.udea.compumovil.gr06_20172.lab1.POJO.User;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiClient;
+import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Viviana Londoño on 21/08/2017.
  */
@@ -111,11 +118,11 @@ public class Login extends AppCompatActivity {
             passwordView.setError(getString(R.string.field_required));
             focusView = passwordView;
             cancel = true;
-        } else if (!isPassword(email,password)){
+        }/* else if (!isPassword(email,password)){
             passwordView.setError(getString(R.string.field_incorrect));
             focusView = passwordView;
             cancel = true;
-        }
+        }*/
         if (cancel){
             focusView.requestFocus();
         }else {
@@ -142,16 +149,44 @@ public class Login extends AppCompatActivity {
 
     private void register() throws InterruptedException{
         db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(StatusContract.Column_Login.ID,(1));
         values.put(StatusContract.Column_Login.EMAIL, emailView.getText().toString());
-        Log.d("tag",emailView.getText().toString());
-        db.insertWithOnConflict(StatusContract.TABLE_LOGIN, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-        db.close();
-        //saveStateButton();
-        Intent newActivity = new Intent(this, MainActivity.class);
-        startActivity(newActivity);
-        finish();
+
+        String email = emailView.getText().toString();
+        String pass = passwordView.getText().toString();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<User> call = apiService.loginPost(email, pass);
+
+        System.out.println("El usuario y contrasela son: "+email+ pass);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+                    System.out.println(response.body().toString());
+                    Log.i("TAG", "post submitted to API." + response.body().toString());
+                    Log.d("tag",emailView.getText().toString());
+                    db.insertWithOnConflict(StatusContract.TABLE_LOGIN, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+                    db.close();
+                    //saveStateButton();
+                    Intent newActivity = new Intent(Login.this, MainActivity.class);
+                    startActivity(newActivity);
+                    finish();
+                }else{
+                    System.out.println("Respuesta post no exitosa");
+                    System.out.println(response.message());
+                    Toast.makeText(Login.this, "Please check your data, email or password incorrect", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                call.cancel();
+                Toast.makeText(Login.this, "Please check your network connection and internet permission", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     //guardar configuración aplicación Android usando SharedPreferences

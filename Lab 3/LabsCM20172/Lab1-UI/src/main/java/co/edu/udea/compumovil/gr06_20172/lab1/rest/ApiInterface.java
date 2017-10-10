@@ -6,6 +6,8 @@ import co.edu.udea.compumovil.gr06_20172.lab1.POJO.Apartment;
 import co.edu.udea.compumovil.gr06_20172.lab1.POJO.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -29,12 +31,22 @@ public interface ApiInterface {
     Call<Apartment> createApartment(@Body Apartment apartment);
 
 
-    //Obtener un apartamendo por id, desde la API
+    //Obtener un usuario por id, desde la API
     @GET("users/{id}")
     Call<User> getUserDetails(@Path("id") int id);
 
-    //Crear un nuevo apartamento
+    //Crear un nuevo usuario
     @POST("/users")
     Call<User> createUser(@Body User user);
+
+    //Verificar login
+    @FormUrlEncoded
+    @POST("/users/login")
+    Call<User> loginPost(@Field("email") String email,
+                        @Field("pass") String pass);
+
+
+
+
 
 }

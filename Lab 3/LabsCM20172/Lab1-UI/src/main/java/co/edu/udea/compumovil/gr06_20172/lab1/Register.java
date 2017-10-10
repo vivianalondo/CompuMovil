@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -154,11 +155,16 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
                 String address = txtValidate[7].getText().toString();
                 String city = txtValidate[8].getText().toString();
                 String gender = optionSelect;
+
+                // get the base 64 string
+                String imgString = Base64.encodeToString(getBitmapAsByteArray(picture),
+                        Base64.NO_WRAP);
                 //values.put(StatusContract.Column_User.PICTURE, getBitmapAsByteArray(picture));
 
                 //Llamado a la api, para registrar usuario en DB externa
                 ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                User user = new User();
+                User user = new User(email, name, lastname, gender, date,
+                        address, pass, city, phone, imgString);
                 Call<User> call = apiService.createUser(user);
                 call.enqueue(new Callback<User>() {
                     @Override
@@ -167,6 +173,8 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
                         if(response.isSuccessful()) {
                             System.out.println(response.body().toString());
                             Log.i("TAG", "post submitted to API." + response.body().toString());
+                            control=true;
+                            finish();
                         }else{
                             System.out.println("Respuesta post no exitosa");
                         }
@@ -179,36 +187,6 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
                 });
             }
 
-
-
-
-            /*else if(!existEmail(txtValidate[0].getText().toString())){
-                db = dbH.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                Cursor search = db.rawQuery("select count(*) from usuario", null);
-                search.moveToFirst();
-                int aux=Integer.parseInt(search.getString(0));
-                values.put(StatusContract.Column_User.ID,(aux+1));
-                values.put(StatusContract.Column_User.MAIL, txtValidate[0].getText().toString());
-                values.put(StatusContract.Column_User.PASS, txtValidate[1].getText().toString());
-                values.put(StatusContract.Column_User.NAME, txtValidate[3].getText().toString());
-                values.put(StatusContract.Column_User.LASTNAME, txtValidate[4].getText().toString());
-                values.put(StatusContract.Column_User.DATE, txtValidate[5].getText().toString());
-                values.put(StatusContract.Column_User.PHONE, txtValidate[6].getText().toString());
-                values.put(StatusContract.Column_User.ADDRESS, txtValidate[7].getText().toString());
-                values.put(StatusContract.Column_User.CITY, txtValidate[8].getText().toString());
-                values.put(StatusContract.Column_User.GENDER, optionSelect);
-                values.put(StatusContract.Column_User.PICTURE, getBitmapAsByteArray(picture));
-                db.insertWithOnConflict(StatusContract.TABLE_USER, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-                db.close();
-                control=true;
-                finish();
-            }
-            else
-            {
-                txtValidate[0].setError(getString(R.string.user_exists));
-                focusView = txtValidate[0];
-            }*/
         }
 
     }
@@ -334,6 +312,11 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
         fecha.setText(new StringBuilder().append(year).append("/").append(monthOfYear).append("/").append(dayOfMonth));
     }
 
+    /**
+     * Validar selección del radiobuntton
+     * @param id
+     * @return
+     */
     private String itemChecked (int id) {
         option = "vacio";
         RadioButton item1 = (RadioButton) findViewById (R.id.rbRegisterGenderF);
