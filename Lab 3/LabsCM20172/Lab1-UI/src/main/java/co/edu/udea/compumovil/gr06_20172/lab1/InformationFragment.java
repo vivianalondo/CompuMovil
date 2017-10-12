@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,20 +78,18 @@ public class InformationFragment extends Fragment {
                 if(response.isSuccessful()) {
                     User user = response.body();
                     System.out.println(response.body().toString());
-                    Log.i("TAG", "post submitted to API." + response.body().toString());
                     txtValidateR[0].setText("Nombre: "+user.getName());
                     txtValidateR[1].setText("Apellido: "+user.getLastName());
-                    txtValidateR[2].setText("E-mail:"+user.getEmail());
-                    txtValidateR[3].setText("Género:"+user.getGender());
-                    txtValidateR[4].setText("Fecha de nacimiento:"+user.getDate());
-                    txtValidateR[5].setText("Teléfono:"+user.getPhone());
-                    txtValidateR[6].setText("Dirección:"+user.getAddress());
-                    txtValidateR[7].setText("Ciudad:"+user.getCity());
+                    txtValidateR[2].setText("E-mail: "+user.getEmail());
+                    txtValidateR[3].setText("Género: "+user.getGender());
+                    txtValidateR[4].setText("Fecha de nacimiento: "+user.getDate());
+                    txtValidateR[5].setText("Teléfono: "+user.getPhone());
+                    txtValidateR[6].setText("Dirección: "+user.getAddress());
+                    txtValidateR[7].setText("Ciudad: "+user.getCity());
 
                     avat = user.getPicture().getBytes();
                     byte[] decodedString = Base64.decode(avat, Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    //Bitmap bitmap = BitmapFactory.decodeByteArray(avat, 0, avat.length);
                     targetImageR.setImageBitmap(decodedByte);
 
                 }else{

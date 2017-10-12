@@ -15,15 +15,6 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/numberApartment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:paddingRight="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/title"
@@ -34,6 +25,13 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/numberApartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:textColor="@color/colorGreyLight" />
 
         <TextView
             android:id="@+id/type"

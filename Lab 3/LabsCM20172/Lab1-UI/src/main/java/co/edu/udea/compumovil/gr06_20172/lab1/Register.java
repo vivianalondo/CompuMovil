@@ -65,7 +65,7 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
         String[] cities = getResources().getStringArray(R.array.cities_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cities);
         ciudad.setAdapter(adapter);
-        Log.d("tag1","acá en el on create");
+
 
         picture = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_profile);
         txtValidate[0]=(EditText)findViewById(R.id.txtRegisterEmail);
@@ -156,6 +156,7 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
                 String city = txtValidate[8].getText().toString();
                 String gender = optionSelect;
 
+                System.out.println("Picture vale: "+ picture);
                 // get the base 64 string
                 String imgString = Base64.encodeToString(getBitmapAsByteArray(picture),
                         Base64.NO_WRAP);

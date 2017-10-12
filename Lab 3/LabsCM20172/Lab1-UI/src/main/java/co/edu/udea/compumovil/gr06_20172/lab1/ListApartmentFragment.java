@@ -34,59 +34,12 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
     private ApartmentsAdapter mAdapter;
     private RecyclerView recyclerView;
 
-    /*@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
-        //view=inflater.inflate(R.layout.list_item_apartment, container, false);
-        context = getContext();
-        mAdapter = new ApartmentsAdapter(apartments, R.layout.list_item_apartment, getContext());
-
-        //Llamado a la api
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Apartment>> call = apiService.getData();
-        call.enqueue(new Callback<List<Apartment>>() {
-            @Override
-            public void onResponse(Call<List<Apartment>> call1, Response<List<Apartment>> response) {
-
-                apartments = response.body();
-                recyclerView.setFilterTouchesWhenObscured(true);
-                recyclerView.setAdapter(mAdapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            }
-
-            @Override
-            public void onFailure(Call<List<Apartment>> call1, Throwable t) {
-
-                Log.e("Error", "Hay un error en el call apartment");
-            }
-        });
-        return recyclerView;
-    }*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        //onCreateOptionsMenu();
-
-        /*mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        mModels = new ArrayList<>();
-
-        for (String movie : MOVIES) {
-            mModels.add(new ExampleModel(movie));
-        }
-
-        mAdapter = new ExampleAdapter(getActivity(), mModels);
-        mRecyclerView.setAdapter(mAdapter);
-        */
         recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //view=inflater.inflate(R.layout.list_item_apartment, container, false);
         context = getActivity().getApplicationContext();
 
         //Llamado a la api
@@ -99,12 +52,10 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
                 apartments = response.body();
                 mAdapter = new ApartmentsAdapter(apartments, R.layout.list_item_apartment, getContext());
 
-                //
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setFilterTouchesWhenObscured(true);
                 recyclerView.setHasFixedSize(true);
-
             }
 
             @Override
@@ -120,7 +71,6 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
 
         menuInflater.inflate(R.menu.search_menu, menu);
-
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
@@ -133,7 +83,7 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
 
         query = query.toLowerCase();
         Log.d("LOGT", query);
-        if (query!=""){
+
             final List<Apartment> filteredModelList = new ArrayList<>();
             for (Apartment model : apartments) {
                 final String text = model.getName().toLowerCase();
@@ -145,10 +95,7 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
             mAdapter.animateTo(filteredModelList);
             recyclerView.scrollToPosition(0);
             return true;
-        }
-        else {
-            return false;
-        }
+
     }
 
 
