@@ -118,7 +118,63 @@ public class ApartmentsAdapter extends RecyclerView.Adapter<ApartmentsAdapter.Ap
 
     @Override
     public int getItemCount() {
-        return apartments.size();
+        int sizel = 0;
+        if (apartments != null){
+            sizel = apartments.size();
+        }
+        return sizel;
+    }
+
+
+    public Apartment removeItem(int position) {
+        final Apartment model = apartments.remove(position);
+        notifyItemRemoved(position);
+        return model;
+    }
+
+    public void addItem(int position, Apartment model) {
+        apartments.add(position, model);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final Apartment model = apartments.remove(fromPosition);
+        apartments.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    public void animateTo(List<Apartment> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    private void applyAndAnimateRemovals(List<Apartment> newModels) {
+        for (int i = apartments.size() - 1; i >= 0; i--) {
+            final Apartment model = apartments.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<Apartment> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final Apartment model = newModels.get(i);
+            if (!apartments.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<Apartment> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final Apartment model = newModels.get(toPosition);
+            final int fromPosition = apartments.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
     }
 }
 

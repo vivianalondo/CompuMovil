@@ -163,5 +163,7 @@
     <string name="settings">Configuración</string>
     <string name="preferencesSesion">Manterner sesion</string>
     <string name="preferencesSesionDescription">Active esta opción para mantener la sesión iniciada</string>
+    <string name="action_search">Buscar</string>
+
 
 </resources>
