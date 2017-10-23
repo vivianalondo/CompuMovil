@@ -80,7 +80,6 @@ public class ListApartmentFragment extends Fragment implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String query) {
-
         query = query.toLowerCase();
         Log.d("LOGT", query);
 

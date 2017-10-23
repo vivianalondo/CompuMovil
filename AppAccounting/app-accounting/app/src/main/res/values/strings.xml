@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">app-accounting</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="prompt_passwordconf">Confirmar Contraseña</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+
+    <string name="btn_register">REGISTRARSE EN APP_ACCOUNTING</string>
+    <string name="btn_login">INICIAR SESION</string>
+    <string name="text_index">App Accounting</string>
+    <string name="text_login">Inicia sesion con email</string>
+    <string name="text_login2">Inicia sesion usando Social</string>
+    <string name="email_login">E-mail</string>
+    <string name="pass_login">Contraseña</string>
+    <string name="name_login">Nombre</string>
+    <string name="login_facebook">Iniciar con Facebook</string>
+    <string name="login_google">Iniciar con Google</string>
+    <string name="btn_registro">REGISTRARSE</string>
+
+    <string name="exit">Cerrar Sesion</string>
+    <string name="settings">Ajustes</string>
+    <string name="profile">Perfil</string>
+    <string name="movements">Perfil</string>
+    <string name="action_search">Buscar</string>
+
+    <string name="text_register">Registro usando Social</string>
+    <string name="text_register2">Registrarse con email</string>
+    <string name="btn_register2">REGISTRARSE</string>
+    <string name="register_facebook">Registro usando Facebook</string>
+    <string name="register_google">Registro con Google</string>
+<!--    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>-->
+
+
+</resources>
