@@ -36,7 +36,11 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".PrincipalActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/apart"
+            android:id="@+id/movements"
             android:icon="@drawable/ic_folder"
             android:tint="@color/colorWhite"
             android:title="@string/movements"/>

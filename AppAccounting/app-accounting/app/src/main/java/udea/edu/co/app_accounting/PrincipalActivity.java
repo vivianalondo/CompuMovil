@@ -72,6 +72,13 @@ public class PrincipalActivity extends AppCompatActivity {
                         //Check to see which item was being clicked and perform appropriate action
                         switch (menuItem.getItemId()){
 
+                            case R.id.movements:
+                                Intent testActivity = new Intent(PrincipalActivity.this, TestActivity.class);
+                                startActivity(testActivity);
+                                //finish();
+                                //fab.setVisibility(View.INVISIBLE);
+                                return true;
+
 
                             //Replacing the main content with ContentFragment Which is our Inbox View;
                             /*case R.id.info:
