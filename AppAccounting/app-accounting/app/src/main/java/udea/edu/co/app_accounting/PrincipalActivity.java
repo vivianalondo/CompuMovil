@@ -99,8 +99,8 @@ public class PrincipalActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()){
 
                             case R.id.movements:
-                                Intent testActivity = new Intent(PrincipalActivity.this, TestActivity.class);
-                                startActivity(testActivity);
+                                Intent ppalActivity = new Intent(PrincipalActivity.this, PrincipalActivity.class);
+                                startActivity(ppalActivity);
                                 //finish();
                                 //fab.setVisibility(View.INVISIBLE);
                                 return true;
@@ -200,8 +200,8 @@ public class PrincipalActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static TestActivity.PlaceholderFragment newInstance(int sectionNumber) {
-            TestActivity.PlaceholderFragment fragment = new TestActivity.PlaceholderFragment();
+        public static PrincipalActivity.PlaceholderFragment newInstance(int sectionNumber) {
+            PrincipalActivity.PlaceholderFragment fragment = new PrincipalActivity.PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
