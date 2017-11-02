@@ -1,25 +1,36 @@
 package udea.edu.co.app_accounting;
 
-import android.support.design.widget.TabLayout;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
+import udea.edu.co.app_accounting.helpers.DbHelper;
+import udea.edu.co.app_accounting.helpers.Session;
+
 public class TestActivity extends AppCompatActivity {
+
+    //declaracion de variables globes
+    DbHelper dbHelper;
+    SQLiteDatabase db;
+    private DrawerLayout mDrawerLayout;
+    private FloatingActionButton fab;
+    public static final String EXTRA_EMAIL = "emailE";
+    public static final String EXTRA_PASS = "pass";
+    private Session session;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,8 +51,10 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        dbHelper =new DbHelper(this);//nueva base de datos
+        session = new Session(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -54,14 +67,6 @@ public class TestActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
     }
 
