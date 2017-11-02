@@ -10,17 +10,6 @@
     android:background="@color/colorGrey">
 
 
-    <TextView
-        android:id="@+id/saldo"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:text="@string/budget"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -32,7 +21,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@drawable/rounded_layout">
+        android:background="@drawable/rounded_layout"
+        android:layout_marginBottom="20dp">
 
 
         <LinearLayout

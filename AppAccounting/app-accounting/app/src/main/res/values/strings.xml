@@ -48,7 +48,7 @@
     <string name="gastos">Gastos: </string>
     <string name="presupuesto">Presupuesto: </string>
     <string name="transactions">Transacciones </string>
-    <string name="balance">Balance mensual: </string>
+    <string name="balance">Balance: $00</string>
     <string name="budget">Presupuesto</string>
     <string name="Feeding">Alimentación</string>
     <string name="Education">Educación</string>

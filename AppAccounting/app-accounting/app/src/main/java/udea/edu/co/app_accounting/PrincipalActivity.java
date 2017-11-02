@@ -258,7 +258,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 case 0:
                     return "PRINCIPAL";
                 case 1:
-                    return "TRANSACCIONES";
+                    return "MOVIMIENTOS";
                 case 2:
                     return "PRESUPUESTO";
                 case 3:

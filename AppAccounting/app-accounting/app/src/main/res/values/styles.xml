@@ -17,4 +17,14 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="Etiquetas">
+        <item name="android:background">@drawable/background_label_fab</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Etiquetas2">
+        <item name="android:background">@color/colorGreen</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>
