@@ -37,7 +37,8 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".IngresoActivity"></activity>
+        <activity android:name=".IngresoActivity" />
+        <activity android:name=".GastoActivity"></activity>
     </application>
 
 </manifest>
