@@ -73,4 +73,9 @@
     <string name="valor">Value</string>
     <string name="agregar">Add</string>
     <string name="view">View in map</string>
+
+
+    <string name="facebook_app_id">285443365300482</string>
+    <string name="fb_login_protocol_scheme">fb285443365300482</string>
+
 </resources>

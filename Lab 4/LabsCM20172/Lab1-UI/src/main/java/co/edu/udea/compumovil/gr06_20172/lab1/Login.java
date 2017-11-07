@@ -19,6 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -30,6 +36,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -40,6 +47,9 @@ import co.edu.udea.compumovil.gr06_20172.lab1.rest.ApiInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 /**
  * Created by Viviana Londoño on 21/08/2017.
@@ -52,12 +62,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private EditText passwordView;
     DbHelper dbHelper;
     SQLiteDatabase db;
-    private RadioButton rbSesion;
-    private boolean isActivateRadioButton;
     private static final String STRING_PREFERENCES = "co.edu.udea.compumovil.gr06_20172.lab1";
     private static final String PREFERENCES_STATE_BUTTON_SESION = "state.button.sesion";
     private Session session;
     private Button btnIngresar;
+    private Button Registrar;
 
     private String email;
     private String password;
@@ -76,6 +85,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     private ProgressBar progressBar;
 
+    //Login Facebook
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -93,6 +106,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         dbHelper = new DbHelper(this);
         session = new Session(this);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
+        Registrar = (Button) findViewById(R.id.btnregistrar) ;
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.signinFacebook);
 
 
         if (session.loggedin()&& dbHelper.mantener()){
@@ -131,6 +148,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 .build();
 
         signInButton = (SignInButton) findViewById(R.id.signinGoogle);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        signInButton.setColorScheme(SignInButton.COLOR_DARK);
+
         signInButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -138,6 +158,26 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 startActivityForResult(intent,SIGN_IN_CODE);
             }
         });
+
+
+        //Facebook
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -150,13 +190,30 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         };
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBarLogin);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBarLogin);
     }
 
-    /*public void saveStateButton(){
-        SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
-        preferences.edit().putBoolean(PREFERENCES_STATE_BUTTON_SESION,rbSesion.isChecked()).apply();
-    }*/
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), R.string.firebase_error_login, Toast.LENGTH_LONG).show();
+                }
+                //progressBar.setVisibility(View.GONE);
+                //loginButton.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+
+    private void goLogInScreen() {
+        Intent intent = new Intent(this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
     public boolean geteStateButton(){
         SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
@@ -166,7 +223,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        String u="",p="";
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == SIGN_IN_CODE){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
@@ -198,16 +256,16 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount signInAccount) {
-        progressBar.setVisibility(View.VISIBLE);
-        signInButton.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.VISIBLE);
+        //signInButton.setVisibility(View.GONE);
 
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                progressBar.setVisibility(View.GONE);
-                signInButton.setVisibility(View.VISIBLE);
+                //progressBar.setVisibility(View.GONE);
+                //signInButton.setVisibility(View.VISIBLE);
 
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), R.string.not_login_google, Toast.LENGTH_SHORT).show();

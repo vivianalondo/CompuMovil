@@ -10,10 +10,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -40,6 +42,7 @@ public class ProfileGoogleFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    Button btnlogout;
 
 
     public ProfileGoogleFragment() {
@@ -52,10 +55,11 @@ public class ProfileGoogleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_profile_google, container, false);
         context = getActivity().getApplicationContext();
-        txtEmailView =(TextView)view.findViewById(R.id.viewNameG);
-        txtNameView =(TextView)view.findViewById(R.id.viewEmailG);
+        txtEmailView =(TextView)view.findViewById(R.id.viewEmailG);
+        txtNameView =(TextView)view.findViewById(R.id.viewNameG);
         imageProfile=(ImageView)view.findViewById(R.id.viewProfileG);
 
+        btnlogout = (Button)view.findViewById(R.id.btnlog_out);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -79,6 +83,16 @@ public class ProfileGoogleFragment extends Fragment {
                 }
             }
         };
+
+
+        btnlogout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                logOut(view);
+            }
+        });
+
 
         return view;
 
@@ -108,7 +122,9 @@ public class ProfileGoogleFragment extends Fragment {
 
     public void logOut(View view) {
         firebaseAuth.signOut();
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+        LoginManager.getInstance().logOut();
+
+        /*Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
                 if (status.isSuccess()) {
@@ -117,22 +133,11 @@ public class ProfileGoogleFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), R.string.not_login_google, Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
+        goLogInScreen();
     }
 
-    public void revoke(View view) {
-        firebaseAuth.signOut();
-        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    goLogInScreen();
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_login_google, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
+
 
     @Override
     public void onStop() {

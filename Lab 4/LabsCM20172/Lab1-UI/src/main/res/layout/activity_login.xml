@@ -31,6 +31,17 @@
                 android:id="@+id/ic_user"
                 android:background="@mipmap/ic_logo"/>
 
+            <TextView
+                android:id="@+id/textLogin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Inicia sesión con email"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -74,27 +85,25 @@
 
                 <Button
                     android:id="@+id/btnIngresar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="@string/btningresar"
                     android:layout_marginLeft="10dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:textColor="@color/blanco"
                     android:textStyle="bold"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
+                    />
 
                 <Button
                     android:id="@+id/btnregistrar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
                     android:text="@string/registrar"
                     android:onClick="register"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:textColor="@color/blanco"
                     android:textStyle="bold"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
+                    />
 
             </LinearLayout>
 
@@ -105,14 +114,33 @@
                 android:gravity="center_horizontal"
                 android:layout_marginTop="20dp">
 
-                <com.google.android.gms.common.SignInButton
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textLogin2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Inicia sesión con social"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <com.google.android.gms.common.SignInButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
-                    android:id="@+id/signinGoogle"
-                    android:background="@color/colorPrimary">
+                    android:id="@+id/signinGoogle">
 
                 </com.google.android.gms.common.SignInButton>
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/signinFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
 
 
             </LinearLayout>
@@ -121,13 +149,5 @@
 
     </ScrollView>
 
-    <ProgressBar
-        android:id="@+id/progressBarLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        />
 
 </LinearLayout>
