@@ -1,0 +1,153 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrincipalFragment"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:weightSum="1"
+    android:background="@color/colorGrey">
+
+
+
+
+    <TextView
+        android:id="@+id/saldo"
+        android:layout_width="202dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rounded"
+        android:gravity="center"
+        android:text="@string/saldo"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="210dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/rounded_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.13"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textIngresos"
+                android:layout_width="139dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/ingresos"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <TextView
+                android:id="@+id/ingresosresult"
+                android:layout_width="105dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="$00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.66" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.13"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textGastos"
+                android:layout_width="139dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/ic_minus"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/gastos"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <TextView
+                android:id="@+id/gastosresult"
+                android:layout_width="105dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="$00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.66" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.13"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textPresupuesto"
+                android:layout_width="139dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/ic_sunny"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/presupuesto"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <TextView
+                android:id="@+id/ṕresupuestoresult"
+                android:layout_width="105dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="$00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.66" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

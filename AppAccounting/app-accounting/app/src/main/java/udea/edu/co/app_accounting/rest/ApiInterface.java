@@ -1,5 +1,7 @@
 package udea.edu.co.app_accounting.rest;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -7,6 +9,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import udea.edu.co.app_accounting.POJO.Debit;
 import udea.edu.co.app_accounting.POJO.User;
 
 /**
@@ -26,6 +29,14 @@ public interface ApiInterface {
     //Crear un nuevo apartamento
     @POST("/apartments")
     Call<Apartment> createApartment(@Body Apartment apartment);*/
+
+    //Obtener ingresos de un usuario por id, desde la API
+    @GET("users/{user_id}/entries")
+    Call<List<Debit>> getUserEntries(@Path("user_id") int user_id);
+
+    //Obtener débitos de un usuario por id, desde la API
+    @GET("users/{user_id}/debits")
+    Call<List<Debit>> getUserDebits(@Path("user_id") int user_id);
 
 
     //Obtener un usuario por id, desde la API

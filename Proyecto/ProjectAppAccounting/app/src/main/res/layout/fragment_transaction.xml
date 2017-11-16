@@ -1,0 +1,195 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PrincipalFragment"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:weightSum="1"
+    android:background="@color/colorGrey">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollRegister"
+        android:background="@drawable/rounded_layout"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rounded_layout"
+            android:layout_marginBottom="20dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:background="@drawable/rounded_layout"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/saldoTransactions"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text="@string/saldo"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/rounder_grey"
+                    android:layout_margin="5dp"
+                    android:inputType="textMultiLine"/>
+
+                <TextView
+                    android:id="@+id/balanceTransaction"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:text="@string/balance"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/rounder_grey"
+                    android:layout_margin="5dp"
+                    android:inputType="textMultiLine"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="370dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:background="@drawable/rounded_layout"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textIngresos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="Pago servicios"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.44"/>
+
+
+                    <TextView
+                        android:id="@+id/ingresosresult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:text="$1,000.000.00"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.64" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:id="@+id/textGastos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_minus"
+                        android:drawablePadding="5dp"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="Pago servicios"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.44"/>
+
+                    <TextView
+                        android:id="@+id/gastosresult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:text="$500.000.00"
+                        android:textColor="@color/colorRed"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.64" />
+                </LinearLayout>
+
+
+                <com.getbase.floatingactionbutton.FloatingActionsMenu
+                    android:id="@+id/menu_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="@dimen/fab_margin"
+                    fab_labelStyle="@style/Etiquetas"
+                    fab_addButtonColorNormal="?attr/colorPrimary"
+                    fab_addButtonSize="normal"
+                    fab_labelsPosition="left">
+
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_ingresos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add"
+                        app:backgroundTint="@color/colorGreen"
+                        app:borderWidth="0dp"
+                        app:elevation="6dp"
+                        app:fabSize="mini" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_gastos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_gastos"
+                        app:backgroundTint="@color/colorRed"
+                        app:borderWidth="0dp"
+                        app:elevation="6dp"
+                        app:fabSize="mini" />
+
+
+                </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
