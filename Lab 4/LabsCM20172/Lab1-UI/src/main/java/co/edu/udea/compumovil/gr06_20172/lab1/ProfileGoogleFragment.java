@@ -43,6 +43,7 @@ public class ProfileGoogleFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     Button btnlogout;
+    Button btnrevoke;
 
 
     public ProfileGoogleFragment() {
@@ -60,22 +61,34 @@ public class ProfileGoogleFragment extends Fragment {
         imageProfile=(ImageView)view.findViewById(R.id.viewProfileG);
 
         btnlogout = (Button)view.findViewById(R.id.btnlog_out);
+        btnrevoke = (Button)view.findViewById(R.id.btnrevoke);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-//        googleApiClient = new  GoogleApiClient.Builder(context)
-//                .enableAutoManage(getActivity(), getActivity())
-//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//                .build();
+       /* googleApiClient = new  GoogleApiClient.Builder(MainActivity.this)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();*/
+
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity() /* FragmentActivity */, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        // your code here
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 if (user != null) {
                     setUserData(user);
                 } else {
@@ -90,6 +103,14 @@ public class ProfileGoogleFragment extends Fragment {
             @Override
             public void onClick(View v){
                 logOut(view);
+            }
+        });
+
+        btnrevoke.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                revoke(view);
             }
         });
 
@@ -137,6 +158,20 @@ public class ProfileGoogleFragment extends Fragment {
         goLogInScreen();
     }
 
+    public void revoke(View view) {
+        firebaseAuth.signOut();
+
+        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if (status.isSuccess()) {
+                    goLogInScreen();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_revoke, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 
     @Override

@@ -145,6 +145,36 @@
                         android:layout_weight="0.64" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <Button style="@style/Widget.AppCompat.Button.Colored"
+                        android:id="@+id/mas_ingre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ Ingresos"
+                        android:gravity="center"
+                        android:layout_weight="0.5"
+                        android:background="@color/colorGreen"
+                        android:layout_margin="5dp"/>
+
+                    <Button style="@style/Widget.AppCompat.Button.Colored"
+                        android:id="@+id/mas_gastos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ Gastos"
+                        android:gravity="center"
+                        android:layout_weight="0.5"
+                        android:background="@color/colorRed"
+                        android:layout_margin="5dp"/>
+
+                </LinearLayout>
+
+
+
 
                 <com.getbase.floatingactionbutton.FloatingActionsMenu
                     android:id="@+id/menu_fab"

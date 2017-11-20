@@ -7,67 +7,87 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Debit;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Entrie;
+
+import java.util.ArrayList;
 
 
 public class PrincipalFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    View view;
+    private ArrayList debits;
+    private ArrayList entries;
+    private DbHelper dbh;
+    private Context context;
+    private Debit gasto;
+    private Entrie ingreso;
+    Double totalGastos;
+    Double totalIngresos;
+    Double totalSaldo;
+    private TextView txtSaldoValor;
+    private TextView txtSaldoIngresos;
+    private TextView txtSaldoGastos;
+    private TextView txtSaldoPresupuesto;
 
     public PrincipalFragment() {
         // Required empty public constructor
     }
 
 
-    public static PrincipalFragment newInstance(String param1, String param2) {
-        PrincipalFragment fragment = new PrincipalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_principal, container, false);
-    }
+        view = inflater.inflate(R.layout.fragment_principal, container, false);
+        context = getActivity().getBaseContext();
+        dbh = new DbHelper(context);
+        debits = dbh.getAllDebits();
+        entries = dbh.getAllEntries();
+        txtSaldoValor = (TextView) view.findViewById(R.id.saldovalor);
+        txtSaldoIngresos = (TextView) view.findViewById(R.id.ingresosresult);
+        txtSaldoGastos = (TextView) view.findViewById(R.id.gastosresult);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        totalGastos = 0.0;
+        totalIngresos = 0.0;
+        totalSaldo = 0.0;
+
+        if (dbh.hayDebits()){
+            for (int i = 0; i < debits.size(); i++){
+                gasto = new Debit();
+                gasto = (Debit) debits.get(i);
+                System.out.println("Valor del gasto "+ gasto.getAmount());
+                totalGastos = totalGastos + gasto.getAmount();
+                //itemsCategoryDebit.add(catdebit.getName());
+            }
+        }else {
+            System.out.println("No hay gastos");
         }
+
+        if (dbh.hayEntries()){
+            for (int i = 0; i < entries.size(); i++){
+                ingreso = new Entrie();
+                ingreso = (Entrie) entries.get(i);
+                System.out.println("Valor del ingreso "+ ingreso.getAmount());
+                totalIngresos = totalIngresos + ingreso.getAmount();
+                //itemsCategoryDebit.add(catdebit.getName());
+            }
+        }else {
+            System.out.println("No hay gastos");
+        }
+
+        totalSaldo = totalIngresos - totalGastos;
+        txtSaldoValor.setText(totalSaldo.toString());
+        txtSaldoIngresos.setText(totalIngresos.toString());
+        txtSaldoGastos.setText(totalGastos.toString());
+
+        System.out.println("la suma de los gastos es: "+totalGastos);
+
+        return view;
     }
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

@@ -11,20 +11,47 @@
     android:background="@color/colorGrey">
 
 
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.13"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/saldotxt"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/rounded"
+            android:gravity="center"
+            android:text="@string/saldo"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/saldovalor"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/rounded"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/saldo"
-        android:layout_width="202dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:text="@string/saldo"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+
 
 
     <LinearLayout
@@ -64,7 +91,6 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="$00"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -102,7 +128,6 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="$00"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp"
                 android:textStyle="bold"

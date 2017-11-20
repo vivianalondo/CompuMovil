@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -51,7 +52,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/valorIngreso"
-                    android:hint="Valor del ingreso $$"
+                    android:hint="@string/amount"
                     android:inputType="number"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
@@ -59,6 +60,7 @@
                     android:layout_marginTop="10dp" />
             </android.support.design.widget.TextInputLayout>
 
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content">
@@ -66,9 +68,9 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tipoingre"
-                    android:hint="Tipo de Ingreso"
+                    android:id="@+id/txtDescripIngre"
                     android:inputType="text"
+                    android:hint="Descripción"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -82,24 +84,33 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtRegisterPassConf"
-                    android:inputType="textPassword"
-                    android:hint="Descripción"
+                    android:id="@+id/txtDateIngreso"
+                    android:inputType="text"
+                    android:hint="@string/fecha"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="30dp"/>
+                    android:onClick="setDate"/>
             </android.support.design.widget.TextInputLayout>
+
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/category_ingre_spinner"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/category"
+                android:textColorHint="@color/colorGreyOsc"
+                app:met_floatingLabel="normal" />
 
 
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REGISTRAR INGRESO"
-                android:id="@+id/btnEnviarRegistro"
-                android:onClick="Validar"
+                android:text="@string/regIngre"
+                android:id="@+id/btnEnviarIngreso"
+                android:onClick="saveIngresos"
                 android:textColor="#fcfafa"
                 android:textStyle="bold"
                 android:paddingLeft="16dp"

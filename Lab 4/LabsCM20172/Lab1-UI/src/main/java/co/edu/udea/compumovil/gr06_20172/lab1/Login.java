@@ -196,6 +196,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private void handleFacebookAccessToken(AccessToken accessToken) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        System.out.println("El token de firebase es: "+credential);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -260,6 +261,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         //signInButton.setVisibility(View.GONE);
 
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
+        System.out.println("El token de firebase es: "+credential);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -82,6 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Método para guardar el registro de usuario
+     * @param v
+     */
     public void saveRegister(View v){
         View focusView=null;
         if (!verificarVacios(txtValidate)){

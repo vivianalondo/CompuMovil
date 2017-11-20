@@ -7,7 +7,6 @@ package com.appaccounting.compumovil.projectappaccounting.Pojo;
 public class Debit {
     private Integer id;
     private Integer userId;
-    private String name;
     private Double amount;
     private String description;
     private String date;
@@ -27,14 +26,6 @@ public class Debit {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Double getAmount() {
@@ -69,14 +60,10 @@ public class Debit {
         this.categoryDebit = categoryDebit;
     }
 
-    public Debit(Integer id, Integer userId, String name, Double amount, String description, String date, Integer categoryDebit) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
+    public Debit(Double amount, String description, String date) {
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.categoryDebit = categoryDebit;
     }
 
     public Debit() {

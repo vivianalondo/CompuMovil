@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
+
 
 public class IndexActivity extends AppCompatActivity {
     private Button btnlogin;
     private Button btnregister;
+    DbHelper dbH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,15 @@ public class IndexActivity extends AppCompatActivity {
 
         btnlogin = (Button) findViewById(R.id.btnIngresar);
         btnregister = (Button) findViewById(R.id.btnregistrar);
+        dbH = new DbHelper(this);
+
+        if (!dbH.hayCategoriesDebits()){
+            dbH.generateCategoriesDebits();
+        }
+
+        if (!dbH.hayCategoriesEntrie()){
+            dbH.generateCategoriesEntries();
+        }
 
         btnlogin.setOnClickListener(new View.OnClickListener(){
             //Activado

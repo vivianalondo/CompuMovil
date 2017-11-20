@@ -219,6 +219,9 @@ public class PrincipalActivity extends AppCompatActivity {
                     return principalFragment;
                 case 1:
                     TransactionFragment transactionFragment = new TransactionFragment();
+                    Bundle args = new Bundle();
+                    args.putString("myString", getIntent().getExtras().getString(EXTRA_EMAIL));
+                    args.putString("myString", getIntent().getExtras().getString(EXTRA_PASS));
                     return transactionFragment;
                 case 2:
                     budgetFragment budFragment = new budgetFragment();
