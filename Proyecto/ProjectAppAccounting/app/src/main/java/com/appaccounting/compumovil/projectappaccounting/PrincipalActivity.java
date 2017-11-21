@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private Session session;
     DbHelper dbH;
     private PrincipalActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    private Button btnIngresos;
+    private Button btnGastos;
+    private LinearLayout botones;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -43,6 +48,9 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        btnIngresos = (Button) findViewById(R.id.mas_ingrep);
+        btnGastos = (Button) findViewById(R.id.mas_gastosp);
+        botones = (LinearLayout)findViewById(R.id.botones);
         dbH = new DbHelper(this);
         session = new Session(this);
         // Adding Toolbar to Main screen
@@ -143,6 +151,26 @@ public class PrincipalActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        btnGastos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PrincipalActivity.this, GastosActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnIngresos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PrincipalActivity.this, IngresosActivity.class);
+               startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -215,15 +243,16 @@ public class PrincipalActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
+                    botones.setVisibility(View.INVISIBLE);
                     PrincipalFragment principalFragment = new PrincipalFragment();
                     return principalFragment;
                 case 1:
+                    botones.setVisibility(View.VISIBLE);
                     TransactionFragment transactionFragment = new TransactionFragment();
                     Bundle args = new Bundle();
-                    args.putString("myString", getIntent().getExtras().getString(EXTRA_EMAIL));
-                    args.putString("myString", getIntent().getExtras().getString(EXTRA_PASS));
                     return transactionFragment;
                 case 2:
+                    botones.setVisibility(View.INVISIBLE);
                     budgetFragment budFragment = new budgetFragment();
                     return budFragment;
             }
@@ -252,5 +281,14 @@ public class PrincipalActivity extends AppCompatActivity {
         }
     }
 
+    public void addNewEntrie(View v){
+        Intent intent = new Intent(PrincipalActivity.this, IngresosActivity.class);
+        startActivity(intent);
+    }
 
+
+    public void addNewDebit(View v){
+        Intent intent = new Intent(PrincipalActivity.this, GastosActivity.class);
+        startActivity(intent);
+    }
 }

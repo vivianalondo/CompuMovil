@@ -699,7 +699,7 @@ public class DbHelper extends SQLiteOpenHelper {
             entrie.setDescription(cursor.getString(2));
             entrie.setDate(cursor.getString(3));
             entrie.setUserId(Integer.parseInt(cursor.getString(4)));
-            entrie.setCategoryDebit(Integer.parseInt(cursor.getString(5)));
+            entrie.setCategoryEntrie(Integer.parseInt(cursor.getString(5)));
 
             Log.d("Add entrie", "El id del usuario es: "+cursor.getString(4));
         }

@@ -1,17 +1,32 @@
 package com.appaccounting.compumovil.projectappaccounting.Pojo;
 
+import com.appaccounting.compumovil.projectappaccounting.IngresosActivity;
+
 /**
- * Created by viviana on 15/11/17.
+ * Created by viviana on 20/11/17.
  */
 
-public class Entrie {
+public class Transaction {
 
     private Integer id;
     private Integer userId;
     private Double amount;
     private String description;
     private String date;
-    private Integer categoryEntrie;
+    private Integer category;
+    private int typeTransaction;
+
+    public Transaction() {
+    }
+
+    public Transaction(Integer userId, Double amount, String description, String date, Integer category, int typeTransaction) {
+        this.userId = userId;
+        this.amount = amount;
+        this.description = description;
+        this.date = date;
+        this.category = category;
+        this.typeTransaction = typeTransaction;
+    }
 
     public Integer getId() {
         return id;
@@ -53,20 +68,19 @@ public class Entrie {
         this.date = date;
     }
 
-    public Integer getCategoryEntrie() {
-        return categoryEntrie;
+    public Integer getCategory() {
+        return category;
     }
 
-    public void setCategoryEntrie(Integer categoryEntrie) {
-        this.categoryEntrie = categoryEntrie;
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
-    public Entrie(Double amount, String description, String date) {
-        this.amount = amount;
-        this.description = description;
-        this.date = date;
+    public int getTypeTransaction() {
+        return typeTransaction;
     }
 
-    public Entrie() {
+    public void setTypeTransaction(int typeTransaction) {
+        this.typeTransaction = typeTransaction;
     }
 }

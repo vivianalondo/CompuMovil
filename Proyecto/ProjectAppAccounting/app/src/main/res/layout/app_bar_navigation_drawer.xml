@@ -26,6 +26,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <include layout="@layout/content_navigation" />
 
     <android.support.v4.view.ViewPager
@@ -33,5 +34,75 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:layout_gravity="bottom|end"
+        android:id="@+id/botones">
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/mas_ingrep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ Ingresos"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:layout_margin="5dp"/>
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/mas_gastosp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ Gastos"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:background="@color/colorRed"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        fab_labelStyle="@style/Etiquetas"
+        fab_addButtonColorNormal="?attr/colorPrimary"
+        fab_addButtonSize="normal"
+        fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accion_ingresos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreen"
+            android:backgroundTint="@color/colorGreen"
+            android:src="@drawable/ic_add"
+            app:fabSize="mini"
+            app:fab_icon="@drawable/ic_add"
+            app:fab_title="Favorito"
+            android:onClick="addNewEntrie"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accion_gastos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorRed"
+            android:backgroundTint="@color/colorRed"
+            android:src="@drawable/ic_gastos"
+            app:fabSize="mini"
+            app:fab_icon="@drawable/ic_add"
+            app:fab_title="Favorito"
+            android:onClick="addNewDebit"/>
+
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>
