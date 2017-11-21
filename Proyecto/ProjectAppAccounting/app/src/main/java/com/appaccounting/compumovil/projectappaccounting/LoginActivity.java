@@ -16,7 +16,7 @@ import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
 
 public class LoginActivity extends AppCompatActivity {
     DbHelper dbH;
-    AutoCompleteTextView txtEmail;
+    EditText txtEmail;
     EditText txtPassword;
     private static final int REQUEST_CODE=1;
 
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dbH = new DbHelper(this);
-        txtEmail = (AutoCompleteTextView) findViewById(R.id.emailLogin);
+        txtEmail = (EditText) findViewById(R.id.emailLogin);
         txtPassword = (EditText) findViewById(R.id.passwordLogin);
     }
 

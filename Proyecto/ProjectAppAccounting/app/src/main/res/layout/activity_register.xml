@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RegisterActivity"
-    android:background="@color/colorGrey">
+    android:background="@drawable/gradient_background">
 
     <!-- Login progress -->
     <ProgressBar
@@ -32,60 +32,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/text_register"
-                android:textColor="@color/colorOscuro"
-                android:textSize="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"/>
 
-            <Button
-                android:id="@+id/register_facebook"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/register_facebook"
-                android:textStyle="bold"
-                android:textColor="@color/colorOscuro"
-                android:textColorHint="?attr/actionModeSplitBackground"
-                android:background="@color/colorWhite"/>
-
-            <Button
-                android:id="@+id/register_google"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/register_google"
-                android:textStyle="bold"
-                android:textColor="@color/colorOscuro"
-                android:textColorHint="?attr/actionModeSplitBackground"
-                android:background="@color/colorWhite"/>
-
-            <Space
-                style="@style/Base.TextAppearance.AppCompat.Headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/textRegister2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/text_register2"
-                android:textColor="@color/colorOscuro"
-                android:textSize="25dp" />
+            <ImageView
+                android:id="@+id/ic_logol"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/logo"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColorHint="#cccccc">
 
                 <EditText
                     android:id="@+id/register_name"
@@ -98,13 +58,17 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColorHint="?attr/actionModeSplitBackground"/>
+                    android:backgroundTint="#ffff"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColorHint="#cccccc">
 
                 <AutoCompleteTextView
                     android:id="@+id/registerEmail"
@@ -113,13 +77,18 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:backgroundTint="#ffff"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColorHint="#cccccc">
 
                 <EditText
                     android:id="@+id/register_password"
@@ -132,13 +101,18 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColorHint="?attr/actionModeSplitBackground"/>
+                    android:textColorHint="?attr/actionModeSplitBackground"
+                    android:backgroundTint="#ffff"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColorHint="#cccccc">
 
                 <EditText
                     android:id="@+id/register_passwordconfirm"
@@ -151,7 +125,10 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColorHint="?attr/actionModeSplitBackground"/>
+                    android:textColorHint="?attr/actionModeSplitBackground"
+                    android:backgroundTint="#ffff"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -160,13 +137,13 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/btn_register2"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="?attr/actionModeSplitBackground"
-                android:background="?attr/actionModeSplitBackground"
-                android:onClick="saveRegister"/>
+                android:onClick="saveRegister"
+                android:background="#004d40" />
 
         </LinearLayout>
     </ScrollView>

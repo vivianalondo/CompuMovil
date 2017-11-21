@@ -4,14 +4,9 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".IndexActivity">
-    android:foregroundGravity="center">
+    tools:context=".IndexActivity"
+    android:background="@drawable/gradient_background">
 
-    <ScrollView
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/colorPrimary">
 
         <LinearLayout
             android:id="@+id/email"
@@ -25,7 +20,8 @@
                 android:layout_height="100dp"
                 android:background="@mipmap/ic_launcher"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp"/>
+                android:layout_marginTop="50dp"/>
+
 
 
             <LinearLayout
@@ -36,28 +32,26 @@
                 android:orientation="vertical"
                 android:layout_marginTop="15dp">
 
+                <ImageView
+                    android:id="@+id/ic_logol"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/logo"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"/>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@string/text_index"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20dp"
-                    android:textStyle="bold"/>
 
                 <Button
                     android:id="@+id/btnregistrar"
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="170dp"
+                    android:layout_marginTop="100dp"
                     android:background="@android:color/background_light"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="@string/btn_register"
-                    android:textColor="?attr/actionModeSplitBackground"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"/>
@@ -67,7 +61,7 @@
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorBlue"
+                    android:background="@color/colorPrimaryDark"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="@string/btn_login"
@@ -80,8 +74,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>
 
