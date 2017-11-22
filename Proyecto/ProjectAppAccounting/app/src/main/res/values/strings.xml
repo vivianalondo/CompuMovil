@@ -81,7 +81,9 @@
     <string name="fecha">Fecha </string>
     <string name="description">Descripción </string>
     <string name="regIngre">Registrar Ingreso </string>
-
+    <string name="inicio">Inicio</string>
+    <string name="reportes">Reportes</string>
+    <string name="presupuest">Presupuesto</string>
 
 
     <string-array name="categories_debits_array">

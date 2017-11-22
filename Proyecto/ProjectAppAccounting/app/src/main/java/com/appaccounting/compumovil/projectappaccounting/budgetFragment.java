@@ -31,15 +31,15 @@ public class budgetFragment extends Fragment {
         context=getActivity().getBaseContext();
         pantalla= (LinearLayout) (view.findViewById(R.id.pantalla));
 
-        String x[]={"lunes","martes","miercoles","jueves","viernes"};
+        String x[]={"Saldo","Ingresos","Gastos","jueves","viernes"};
         double y[]={20,30,44,0,-25};
-        Columna=new PlotBarritas(context,"Gráfico de Columnas ","articulos vendidos por dia");
+        Columna=new PlotBarritas(context,"Gráfico de Columnas ","Monto");
         //en context puede colocarse simplemente this
         //personalizacion del grafico
         Columna.Columna(x,y);// OJO x e y DEBEN SER DEL MISMO TAMAÑO O CAUSARA QUE SE CIERRE LA APLICACION.
         Columna.SetHD(true);
         //cambiemos el color del dato 3 o sea "44" rojo=255,verde=0,Azul=0 los ultimos tres enteros son los colores en rgb
-        Columna.SetColorPila(3,255,0,0);//muestra el tercer dato en color rojo
+        Columna.SetColorPila(2 ,200,0,120);//muestra el tercer dato en color rojo
 
         //mostrando en pantalla
         pantalla.removeAllViews();

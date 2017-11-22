@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -34,7 +35,7 @@ public class PrincipalActivity extends AppCompatActivity {
     public static final String EXTRA_PASS = "pass";
     private Session session;
     DbHelper dbH;
-    private PrincipalActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    //private PrincipalActivity.SectionsPagerAdapter mSectionsPagerAdapter;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -63,7 +64,7 @@ public class PrincipalActivity extends AppCompatActivity {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Create the adapter that will return a fragment for each of the three
+        /*// Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new PrincipalActivity.SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -71,8 +72,14 @@ public class PrincipalActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs1);
-        tabLayout.setupWithViewPager(mViewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs2);
+        tabLayout.setupWithViewPager(mViewPager);*/
+
+
+        PrincipalFragment fragment = new PrincipalFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
 
         // Set behavior of Navigation drawer
         navigationView.setNavigationItemSelectedListener(
@@ -88,11 +95,32 @@ public class PrincipalActivity extends AppCompatActivity {
                         //Check to see which item was being clicked and perform appropriate action
                         switch (menuItem.getItemId()){
 
-                            case R.id.movements:
+                            case R.id.action_index:
                                 Intent ppalActivity = new Intent(PrincipalActivity.this, PrincipalActivity.class);
                                 startActivity(ppalActivity);
                                 //finish();
                                 //fab.setVisibility(View.INVISIBLE);
+                                return true;
+
+                            case R.id.action_movements:
+                                TransactionFragment fragment = new TransactionFragment();
+                                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                                fragmentTransaction.commit();
+                                return true;
+
+                            case R.id.action_presupuesto:
+                                budgetFragment fragmentB = new budgetFragment();
+                                FragmentTransaction fragmentTransactionB = getSupportFragmentManager().beginTransaction();
+                                fragmentTransactionB.replace(R.id.fragment_container,fragmentB);
+                                fragmentTransactionB.commit();
+                                return true;
+
+                            case R.id.action_reportes:
+                                ReportFragment fragmentR = new ReportFragment();
+                                FragmentTransaction fragmentTransactionR = getSupportFragmentManager().beginTransaction();
+                                fragmentTransactionR.replace(R.id.fragment_container,fragmentR);
+                                fragmentTransactionR.commit();
                                 return true;
 
 
@@ -206,7 +234,7 @@ public class PrincipalActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    /*public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -227,6 +255,9 @@ public class PrincipalActivity extends AppCompatActivity {
                 case 2:
                     budgetFragment budFragment = new budgetFragment();
                     return budFragment;
+                case 3:
+                    ReportFragment reportFragment = new ReportFragment();
+                    return reportFragment;
             }
             return null;
         }
@@ -234,24 +265,24 @@ public class PrincipalActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "PRINCIPAL";
+                    return "Principal";
                 case 1:
-                    return "MOVIMIENTOS";
+                    return "Movimientos";
                 case 2:
-                    return "PRESUPUESTO";
+                    return "Presupuesto";
                 case 3:
-                    return "REPORTES";
+                    return "Reportes";
             }
             return null;
         }
-    }
+    }*/
 
     public void addNewEntrie(View v){
         Intent intent = new Intent(PrincipalActivity.this, IngresosActivity.class);

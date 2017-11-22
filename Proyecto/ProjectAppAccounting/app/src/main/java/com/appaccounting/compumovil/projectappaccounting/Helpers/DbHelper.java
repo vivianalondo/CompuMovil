@@ -346,7 +346,8 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public boolean hayEntries(){
         boolean hay = false;
-        String selectQuery = "select " +COLUMN_ID+" from " + ENTRIE_TABLE;
+        String selectQuery = "select " +COLUMN_ID+" from " + ENTRIE_TABLE + " where " +
+                COLUMN_USER + " = " + "'"+user.getId()+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.getCount() != 0) {
@@ -362,7 +363,9 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public boolean hayDebits(){
         boolean hay = false;
-        String selectQuery = "select " +COLUMN_ID+" from " + DEBIT_TABLE;
+        //String selectQuery = "select " +COLUMN_ID+" from " + DEBIT_TABLE;
+        String selectQuery = "select "+COLUMN_ID+" from " + DEBIT_TABLE + " where " +
+                COLUMN_USER + " = " + "'"+user.getId()+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.getCount() != 0) {
@@ -378,7 +381,8 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public boolean hayBudgets(){
         boolean hay = false;
-        String selectQuery = "select " +COLUMN_ID+" from " + BUDGET_TABLE;
+        String selectQuery = "select " +COLUMN_ID+" from " + BUDGET_TABLE + " where " +
+                COLUMN_USER + " = " + "'"+user.getId()+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.getCount() != 0) {
@@ -925,6 +929,9 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] categories;
         Resources resources = context.getResources();
+        DbHelper dbh = new DbHelper(context);
+        User usuario = new User("test", "test@t","123456");
+        dbh.addUser(usuario);
 
         categories = resources.getStringArray(R.array.categories_debits_array);
         /*ArrayList<String> categorias = new ArrayList<>();
@@ -955,5 +962,58 @@ public class DbHelper extends SQLiteOpenHelper {
             db.insert(CATEGORY_ENTRIE_TABLE, null, values);
         }
         db.close();
+    }
+
+
+    /**
+     * Método para retornar la cantidad de ingresos
+     * @return
+     */
+    public Double countTotalEntries(){
+        ArrayList entries = new ArrayList();
+        Double result= 0.0;
+        Entrie entrie;
+        DbHelper dbh = new DbHelper(context);
+
+        if (dbh.hayEntries()){
+            try {
+                entries = dbh.getEntrieByUser();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < entries.size(); i++){
+                entrie = (Entrie) entries.get(i);
+                System.out.println("Valor del ingreso "+ entrie.getAmount());
+                result = result + entrie.getAmount();
+            }
+        }
+        return result;
+    }
+
+
+
+    /**
+     * Método para retornar la cantidad de gastos
+     * @return
+     */
+    public Double countTotalDebits(){
+        ArrayList debits = new ArrayList();
+        Double result= 0.0;
+        Debit debit;
+        DbHelper dbh = new DbHelper(context);
+
+        if (dbh.hayEntries()){
+            try {
+                debits = dbh.getDebitByUser();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < debits.size(); i++){
+                debit = (Debit) debits.get(i);
+                System.out.println("Valor del ingreso "+ debit.getAmount());
+                result = result + debit.getAmount();
+            }
+        }
+        return result;
     }
 }

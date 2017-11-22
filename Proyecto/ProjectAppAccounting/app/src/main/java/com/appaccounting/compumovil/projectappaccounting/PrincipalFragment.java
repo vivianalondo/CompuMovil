@@ -13,6 +13,7 @@ import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.Debit;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.Entrie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -44,8 +45,8 @@ public class PrincipalFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_principal, container, false);
         context = getActivity().getBaseContext();
         dbh = new DbHelper(context);
-        debits = dbh.getAllDebits();
-        entries = dbh.getAllEntries();
+
+
         txtSaldoValor = (TextView) view.findViewById(R.id.saldovalor);
         txtSaldoIngresos = (TextView) view.findViewById(R.id.ingresosresult);
         txtSaldoGastos = (TextView) view.findViewById(R.id.gastosresult);
@@ -55,6 +56,12 @@ public class PrincipalFragment extends Fragment {
         totalSaldo = 0.0;
 
         if (dbh.hayDebits()){
+
+            try {
+                debits = dbh.getDebitByUser();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < debits.size(); i++){
                 gasto = new Debit();
                 gasto = (Debit) debits.get(i);
@@ -67,6 +74,11 @@ public class PrincipalFragment extends Fragment {
         }
 
         if (dbh.hayEntries()){
+            try {
+                entries = dbh.getEntrieByUser();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < entries.size(); i++){
                 ingreso = new Entrie();
                 ingreso = (Entrie) entries.get(i);

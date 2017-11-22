@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:baselineAligned="false"
     android:weightSum="1"
-    android:background="@color/colorGrey"
+    android:background="@color/colorWhite"
     android:id="@+id/transaction_layout">
 
 
@@ -79,7 +79,19 @@
                         android:textColor="@color/colorGreen"
                         android:textSize="18dp"
                         android:textStyle="bold"
-                        android:layout_weight="0.64" />
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.54" />
                 </LinearLayout>
+
+    <TextView
+        android:id="@+id/textLinea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="_____________________________________________________"
+        android:textColor="@color/colorGreyOsc"
+        android:textSize="14dp"
+        android:layout_weight="0.44"/>
 
 </LinearLayout>

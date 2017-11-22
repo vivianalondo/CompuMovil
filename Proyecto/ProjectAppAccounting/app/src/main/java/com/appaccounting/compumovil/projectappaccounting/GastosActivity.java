@@ -2,6 +2,7 @@ package com.appaccounting.compumovil.projectappaccounting;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -161,6 +162,8 @@ public class GastosActivity extends AppCompatActivity {
 
             //newUser = dbH.addUser(user);
             control=true;
+            Intent ppalActivity = new Intent(GastosActivity.this, PrincipalActivity.class);
+            startActivity(ppalActivity);
             finish();
 
         }
