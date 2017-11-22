@@ -39,7 +39,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".GastosActivity" />
         <activity android:name=".IngresosActivity" />
-        <activity android:name=".ReportGeneralActivity"></activity>
+        <activity android:name=".ReportGeneralActivity" />
+        <activity android:name=".PresupuestoActivity"></activity>
     </application>
 
 </manifest>

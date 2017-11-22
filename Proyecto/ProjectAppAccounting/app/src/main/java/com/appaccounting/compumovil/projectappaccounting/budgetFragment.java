@@ -4,19 +4,37 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.appaccounting.compumovil.projectappaccounting.Adapter.BudgetAdapter;
+import com.appaccounting.compumovil.projectappaccounting.Adapter.TransactionAdapter;
+import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Budget;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Debit;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Entrie;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.Transaction;
+import com.appaccounting.compumovil.projectappaccounting.Pojo.User;
 import com.juang.jplot.PlotBarritas;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class budgetFragment extends Fragment {
+    private ArrayList presupuestosArray;
+    private BudgetAdapter bAdapter;
+    private RecyclerView recyclerView;
+    private Context context;
+    private Budget budget;
+    private User userLogueado;
+    DbHelper dbh;
     View view;
-    Context context;
-    PlotBarritas Columna;
-    LinearLayout pantalla;
 
 
     public budgetFragment() {
@@ -29,23 +47,37 @@ public class budgetFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_budget, container, false);
         context=getActivity().getBaseContext();
-        pantalla= (LinearLayout) (view.findViewById(R.id.pantalla));
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view_budget, container, false);
 
-        String x[]={"Saldo","Ingresos","Gastos","jueves","viernes"};
-        double y[]={20,30,44,0,-25};
-        Columna=new PlotBarritas(context,"Gráfico de Columnas ","Monto");
-        //en context puede colocarse simplemente this
-        //personalizacion del grafico
-        Columna.Columna(x,y);// OJO x e y DEBEN SER DEL MISMO TAMAÑO O CAUSARA QUE SE CIERRE LA APLICACION.
-        Columna.SetHD(true);
-        //cambiemos el color del dato 3 o sea "44" rojo=255,verde=0,Azul=0 los ultimos tres enteros son los colores en rgb
-        Columna.SetColorPila(2 ,200,0,120);//muestra el tercer dato en color rojo
+        budget = new Budget();
+        userLogueado = new User();
+        dbh = new DbHelper(context);
+        Integer i = 0;
+        presupuestosArray = new ArrayList();
+        userLogueado = dbh.getLogin();
 
-        //mostrando en pantalla
-        pantalla.removeAllViews();
-        pantalla.addView(Columna);
+        if (!dbh.hayBudgets()) {
+            Toast.makeText(context, "No se encontraron presupuestos registrados", Toast.LENGTH_SHORT).show();
+        }else {
+            try {
+                presupuestosArray = dbh.getBudgetByUser();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        return view;
+        if (presupuestosArray==null){
+            Toast.makeText(context, "No se encontraron presupuestos registrados", Toast.LENGTH_SHORT).show();
+        }
+            bAdapter = new BudgetAdapter(presupuestosArray, R.layout.fragment_budget, getContext());
+            recyclerView.setAdapter(bAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setFilterTouchesWhenObscured(true);
+            recyclerView.setHasFixedSize(true);
+
+
+        return recyclerView;
+
     }
 
 

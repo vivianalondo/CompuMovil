@@ -72,13 +72,10 @@ public class Budget {
     public Budget() {
     }
 
-    public Budget(Integer id, Double amount, String description, String startDate, String endDate, Integer userId, Integer categoryDebit) {
-        this.id = id;
+    public Budget(Double amount, String description, String startDate, String endDate) {
         this.amount = amount;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.userId = userId;
-        this.categoryDebit = categoryDebit;
     }
 }

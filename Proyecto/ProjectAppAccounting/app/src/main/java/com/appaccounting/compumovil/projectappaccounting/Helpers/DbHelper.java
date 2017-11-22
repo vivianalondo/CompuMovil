@@ -300,7 +300,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_START_DATE, budget.getStartDate());
         values.put(COLUMN_END_DATE, budget.getEndDate());
         values.put(COLUMN_USER, Integer.parseInt(userID));
-        values.put(COLUMN_CATEGORY_ENTRIE, Integer.parseInt(categoryDebitID));
+        values.put(COLUMN_CATEGORY_DEBIT, Integer.parseInt(categoryDebitID));
 
         long id = db.insert(BUDGET_TABLE, null, values);
         budget.setId((int)id);

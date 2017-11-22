@@ -26,9 +26,6 @@ import java.util.ArrayList;
 
 
 public class TransactionFragment extends Fragment {
-    private FloatingActionButton fabIngre;
-    private FloatingActionButton fabGast;
-    private FloatingActionButton fabAccIngre;
 
     private ArrayList gastosArray;
     private ArrayList ingresosArray;
@@ -73,7 +70,7 @@ public class TransactionFragment extends Fragment {
 
         if (!dbh.hayEntries()) {
             if (!dbh.hayDebits()) {
-                Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_SHORT).show();
             } else {
                 try {
                     gastosArray = dbh.getDebitByUser();
@@ -98,7 +95,7 @@ public class TransactionFragment extends Fragment {
 
         if(ingresosArray==null){
             if (gastosArray==null){
-                Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_SHORT).show();
             }
         }else if (gastosArray.size()>=1){
             for (i=0;i<gastosArray.size();i++){
@@ -123,9 +120,9 @@ public class TransactionFragment extends Fragment {
         }
 
         if (movimientosArray.size()<1){
-            Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_SHORT).show();
 
-        }else
+        }
 
             tAdapter = new TransactionAdapter(movimientosArray, R.layout.fragment_transaction, getContext());
             recyclerView.setAdapter(tAdapter);

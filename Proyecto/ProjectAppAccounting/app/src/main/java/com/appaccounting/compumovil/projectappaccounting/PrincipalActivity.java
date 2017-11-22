@@ -294,4 +294,9 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = new Intent(PrincipalActivity.this, GastosActivity.class);
         startActivity(intent);
     }
+
+    public void addNewBudget(View v){
+        Intent intent = new Intent(PrincipalActivity.this, PresupuestoActivity.class);
+        startActivity(intent);
+    }
 }

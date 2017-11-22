@@ -38,8 +38,6 @@ import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>{
 
-    private List<Entrie> ingresos;
-    private List<Debit> gastos;
     private List<Transaction> movimientos;
     private int rowLayout;
     Context context;

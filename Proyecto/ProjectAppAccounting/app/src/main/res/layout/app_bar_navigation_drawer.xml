@@ -62,9 +62,19 @@
             android:backgroundTint="@color/colorRed"
             android:src="@drawable/ic_gastos"
             app:fabSize="mini"
-            app:fab_icon="@drawable/ic_add"
             app:fab_title="Favorito"
             android:onClick="addNewDebit" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accion_presupuesto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlue"
+            android:backgroundTint="@color/colorBlue"
+            android:src="@drawable/ic_sunny_blanco"
+            app:fabSize="mini"
+            app:fab_title="Favorito"
+            android:onClick="addNewBudget" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
