@@ -8,6 +8,13 @@
     android:baselineAligned="false"
     android:weightSum="1">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnReportG"
+        android:text="Reporte"
+        android:onClick="verReporteGeneral"/>
+
     <LinearLayout
         android:id="@+id/pantallaReport"
         android:layout_width="match_parent"

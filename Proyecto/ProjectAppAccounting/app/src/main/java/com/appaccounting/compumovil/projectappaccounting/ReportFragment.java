@@ -1,12 +1,14 @@
 package com.appaccounting.compumovil.projectappaccounting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
@@ -19,10 +21,10 @@ public class ReportFragment extends Fragment {
     Context context;
     String totalGastos;
     String totalIngresos;
-    Double totalSaldo;
     DbHelper dbh;
     float fGastos;
     float fIngresos;
+    Button btnReport;
 
     public ReportFragment() {
         // Required empty public constructor
@@ -34,6 +36,7 @@ public class ReportFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_report, container, false);
         context = getActivity().getBaseContext();
         dbh = new DbHelper(context);
+        btnReport = (Button) view.findViewById(R.id.btnReportG);
 
         totalGastos = dbh.countTotalDebits().toString();
         totalIngresos = dbh.countTotalEntries().toString();
@@ -55,7 +58,21 @@ public class ReportFragment extends Fragment {
         pantalla.addView(pastel);
 
 
+        btnReport.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                verReporteGeneral(v);
+            }
+        });
+
         return view;
+    }
+
+    private void verReporteGeneral(View v){
+        Intent repActivity = new Intent(context, ReportGeneralActivity.class);
+        startActivity(repActivity);
     }
 
 }
