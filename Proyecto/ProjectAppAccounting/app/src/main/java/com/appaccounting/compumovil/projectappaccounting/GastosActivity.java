@@ -2,9 +2,14 @@ package com.appaccounting.compumovil.projectappaccounting;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -27,6 +32,7 @@ import java.util.Calendar;
 
 public class GastosActivity extends AppCompatActivity {
 
+    public static final int NOTIFICACION_ID=1;
     private Button btnRegistrarGasto;
     private boolean control=false;
     EditText[] txtValidate = new EditText[3];
@@ -162,6 +168,7 @@ public class GastosActivity extends AppCompatActivity {
 
             //newUser = dbH.addUser(user);
             control=true;
+            showNotification();
             Intent ppalActivity = new Intent(GastosActivity.this, PrincipalActivity.class);
             startActivity(ppalActivity);
             finish();
@@ -206,5 +213,26 @@ public class GastosActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public  void showNotification(){
+        //Construccion de la accion del intent implicito
+        Intent intent= new Intent(this, PrincipalActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,0);
+
+        //Construccion de la notificacion;
+        NotificationCompat.Builder builder= new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_alert);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_alert));
+        builder.setContentTitle("Alerta sobrepaso gasto");
+        builder.setContentText("Haz excedido el monto presupuestado");
+        builder.setSubText("Toca para visualizar tu presupuesto");
+
+        //Enviar la notificacion
+        NotificationManager notificationManager= (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICACION_ID,builder.build());
+
     }
 }

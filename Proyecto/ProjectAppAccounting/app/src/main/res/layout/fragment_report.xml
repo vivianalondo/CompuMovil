@@ -21,26 +21,21 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnReportG"
-                android:text="Reporte"
-                android:onClick="verReporteGeneral"/>
-
             <LinearLayout
                 android:id="@+id/pantallaReportGeneral"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/pantallaReportGastos"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="horizontal">
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
 
             </LinearLayout>
 
@@ -48,7 +43,8 @@
                 android:id="@+id/pantallaReportIngresos"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
 
             </LinearLayout>
 

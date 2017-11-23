@@ -647,10 +647,10 @@ public class DbHelper extends SQLiteOpenHelper {
             budget.setDescription(cursor.getString(2));
             budget.setStartDate(cursor.getString(3));
             budget.setEndDate(cursor.getString(4));
-            budget.setUserId(Integer.parseInt(cursor.getString(5)));
-            budget.setCategoryDebit(Integer.parseInt(cursor.getString(6)));
+            budget.setUserId(Integer.parseInt(cursor.getString(6)));
+            budget.setCategoryDebit(Integer.parseInt(cursor.getString(5)));
 
-            Log.d("Add debit", "El id del usuario es: "+cursor.getString(5));
+            Log.d("Add debit", "El id del usuario es: "+cursor.getString(6));
         }
         db.close();
         return budget;
@@ -702,10 +702,10 @@ public class DbHelper extends SQLiteOpenHelper {
             entrie.setAmount(Double.valueOf(cursor.getString(1)));
             entrie.setDescription(cursor.getString(2));
             entrie.setDate(cursor.getString(3));
-            entrie.setUserId(Integer.parseInt(cursor.getString(4)));
-            entrie.setCategoryEntrie(Integer.parseInt(cursor.getString(5)));
+            entrie.setUserId(Integer.parseInt(cursor.getString(5)));
+            entrie.setCategoryEntrie(Integer.parseInt(cursor.getString(4)));
 
-            Log.d("Add entrie", "El id del usuario es: "+cursor.getString(4));
+            Log.d("Add entrie", "El id del usuario es: "+cursor.getString(5));
         }
         db.close();
         return entrie;
@@ -1015,5 +1015,58 @@ public class DbHelper extends SQLiteOpenHelper {
             }
         }
         return result;
+    }
+
+
+    /**
+     * Método para obtener los gastos por categoría
+     * @param category
+     * @return
+     */
+    public Debit getDebitByCategory(String category){
+        Debit debit = new Debit();
+        String selectQuery = "select * from " + DEBIT_TABLE + " where " +
+                COLUMN_CATEGORY_DEBIT + " = " + "'"+category+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            debit.setId(Integer.valueOf(cursor.getString(0)));
+            debit.setAmount(Double.valueOf(cursor.getString(1)));
+            debit.setDescription(cursor.getString(2));
+            debit.setDate(cursor.getString(5));
+            debit.setUserId(Integer.parseInt(cursor.getString(4)));
+            debit.setCategoryDebit(Integer.parseInt(cursor.getString(3)));
+
+            Log.d("Add debit", "El id del usuario es: "+cursor.getString(4));
+        }
+        db.close();
+        return debit;
+    }
+
+    /**
+     * Método para obtener los ingresos por categoría
+     * @param category
+     * @return
+     */
+    public Entrie getEntrieByCategory(String category){
+        Entrie entrie = new Entrie();
+        String selectQuery = "select * from " + ENTRIE_TABLE + " where " +
+                COLUMN_CATEGORY_ENTRIE + " = " + "'"+category+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            entrie.setId(Integer.valueOf(cursor.getString(0)));
+            entrie.setAmount(Double.valueOf(cursor.getString(1)));
+            entrie.setDescription(cursor.getString(2));
+            entrie.setDate(cursor.getString(3));
+            entrie.setUserId(Integer.parseInt(cursor.getString(5)));
+            entrie.setCategoryEntrie(Integer.parseInt(cursor.getString(4)));
+
+            Log.d("Add debit", "El id del usuario es: "+cursor.getString(5));
+        }
+        db.close();
+        return entrie;
     }
 }

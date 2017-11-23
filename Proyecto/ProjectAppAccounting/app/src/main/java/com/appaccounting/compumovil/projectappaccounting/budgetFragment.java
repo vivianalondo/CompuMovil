@@ -13,14 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.appaccounting.compumovil.projectappaccounting.Adapter.BudgetAdapter;
-import com.appaccounting.compumovil.projectappaccounting.Adapter.TransactionAdapter;
 import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.Budget;
-import com.appaccounting.compumovil.projectappaccounting.Pojo.Debit;
-import com.appaccounting.compumovil.projectappaccounting.Pojo.Entrie;
-import com.appaccounting.compumovil.projectappaccounting.Pojo.Transaction;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.User;
-import com.juang.jplot.PlotBarritas;
 
 import java.io.IOException;
 import java.util.ArrayList;

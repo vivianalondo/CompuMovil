@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.appaccounting.compumovil.projectappaccounting.Helpers.DatePickerFragment;
 import com.appaccounting.compumovil.projectappaccounting.Helpers.DbHelper;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.Budget;
 import com.appaccounting.compumovil.projectappaccounting.Pojo.CategoryDebit;
@@ -99,6 +100,14 @@ public class PresupuestoActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         saveDate(year, month+1, day);
+
+
+        txtValidate[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }//./OnClick
+        });
     }
 
     @SuppressWarnings("deprecation")
@@ -111,6 +120,16 @@ public class PresupuestoActivity extends AppCompatActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            return new DatePickerDialog(this,
+                    myDateListener, year, month, day);
+        }
+        return null;
+    }
+
+
+    protected Dialog onCreateDialog2(int id) {
         // TODO Auto-generated method stub
         if (id == 999) {
             return new DatePickerDialog(this,
@@ -135,9 +154,8 @@ public class PresupuestoActivity extends AppCompatActivity {
     private void saveDate(int year, int month, int day) {
         txtValidate[2].setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
-        txtValidate[3].setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
     }
+    
 
 
     public void savePresupuesto(View v) throws IOException {
@@ -209,5 +227,18 @@ public class PresupuestoActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+
+    private void showDatePickerDialog() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because january is zero
+                final String selectedDate = day + "/" + (month+1) + "/" + year;
+                txtValidate[3].setText(selectedDate);
+            }
+        });
+        newFragment.show(getFragmentManager(), "datePicker");
     }
 }
