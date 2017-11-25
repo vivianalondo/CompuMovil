@@ -15,7 +15,7 @@
 
         <item
             android:id="@+id/action_presupuesto"
-            android:icon="@drawable/presupuesto"
+            android:icon="@drawable/presupuesto2"
             android:tint="@color/colorWhite"
             android:title="@string/presupuest"/>
 

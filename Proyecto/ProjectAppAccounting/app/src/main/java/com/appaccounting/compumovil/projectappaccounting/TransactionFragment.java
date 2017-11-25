@@ -97,7 +97,14 @@ public class TransactionFragment extends Fragment {
             if (gastosArray==null){
                 Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_SHORT).show();
             }
-        }else if (gastosArray.size()>=1){
+        }else if (gastosArray==null){
+            for (i=0;i<ingresosArray.size();i++){
+                ingreso = (Entrie)ingresosArray.get(i);
+                transaction = new Transaction(userLogueado.getId(), ingreso.getAmount(), ingreso.getDescription(),
+                        ingreso.getDate(), ingreso.getCategoryEntrie(),1);
+                movimientosArray.add(transaction);
+            }
+        }else{
             for (i=0;i<gastosArray.size();i++){
                 gasto = (Debit) gastosArray.get(i);
                 transaction = new Transaction(userLogueado.getId(), gasto.getAmount(), gasto.getDescription(),
@@ -110,14 +117,8 @@ public class TransactionFragment extends Fragment {
                         ingreso.getDate(), ingreso.getCategoryEntrie(),1);
                 movimientosArray.add(transaction);
             }
-        }else {
-            for (i=0;i<ingresosArray.size();i++){
-                ingreso = (Entrie)ingresosArray.get(i);
-                transaction = new Transaction(userLogueado.getId(), ingreso.getAmount(), ingreso.getDescription(),
-                        ingreso.getDate(), ingreso.getCategoryEntrie(),1);
-                movimientosArray.add(transaction);
-            }
         }
+
 
         if (movimientosArray.size()<1){
             Toast.makeText(context, "No se encontraron transacciones", Toast.LENGTH_SHORT).show();

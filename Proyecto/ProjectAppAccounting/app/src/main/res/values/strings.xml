@@ -17,7 +17,7 @@
     </string>
 
 
-    <string name="btn_register">REGISTRARSE EN APP_ACCOUNTING</string>
+    <string name="btn_register">REGISTRARSE EN APP ACCOUNTING</string>
     <string name="btn_login">INICIAR SESION</string>
     <string name="text_index">App Accounting</string>
     <string name="text_login">Inicia sesion con email</string>

@@ -26,6 +26,7 @@ import com.appaccounting.compumovil.projectappaccounting.Pojo.User;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -139,13 +140,17 @@ public class GastosActivity extends AppCompatActivity {
     };
 
     private void saveDate(int year, int month, int day) {
-        txtValidate[2].setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        txtValidate[2].setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
     }
 
 
-    public void saveGastos(View v) throws IOException {
+    public void saveGastos(View v) throws IOException, ParseException {
         View focusView=null;
+        Double monto = 0.0;
+        Double montoDeByCat = 0.0;
+        Debit gastoD = new Debit();
+        ArrayList debitsByCat;
         if (!verificarVacios(txtValidate)){
 
         }
@@ -154,6 +159,7 @@ public class GastosActivity extends AppCompatActivity {
             String categorySelect= spinnerCategoryDebit.getText().toString();
             Integer categoryId;
             Integer userId;
+
             String description = txtValidate[1].getText().toString();
             String date = txtValidate[2].getText().toString();
             CategoryDebit categoryDebitSelect = dbH.getCategoryDebitsByName(categorySelect);
@@ -168,7 +174,26 @@ public class GastosActivity extends AppCompatActivity {
 
             //newUser = dbH.addUser(user);
             control=true;
-            showNotification();
+
+            if (dbH.hayDebits()){
+                debitsByCat = dbH.getAllDebitsByCategory(String.valueOf(categoryId));
+                if (debitsByCat.size()>=1){
+                    for (int i = 0; i<debitsByCat.size(); i++){
+                        gastoD = (Debit)debitsByCat.get(i);
+                        montoDeByCat = montoDeByCat+gastoD.getAmount();
+                    }
+                }
+            }
+
+            if (dbH.hayBudgets()){
+                monto = dbH.validateBudgetByCategory(String.valueOf(categoryId));
+                if (montoDeByCat>monto){
+                    showNotification();
+                }
+            }
+
+
+
             Intent ppalActivity = new Intent(GastosActivity.this, PrincipalActivity.class);
             startActivity(ppalActivity);
             finish();
@@ -228,7 +253,7 @@ public class GastosActivity extends AppCompatActivity {
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_alert));
         builder.setContentTitle("Alerta sobrepaso gasto");
         builder.setContentText("Haz excedido el monto presupuestado");
-        builder.setSubText("Toca para visualizar tu presupuesto");
+        builder.setSubText("Toca para visualizar tu presupuesto2");
 
         //Enviar la notificacion
         NotificationManager notificationManager= (NotificationManager)getSystemService(NOTIFICATION_SERVICE);

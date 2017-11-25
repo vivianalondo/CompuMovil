@@ -152,8 +152,8 @@ public class PresupuestoActivity extends AppCompatActivity {
             };
 
     private void saveDate(int year, int month, int day) {
-        txtValidate[2].setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        txtValidate[2].setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
     }
     
 
@@ -235,7 +235,7 @@ public class PresupuestoActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because january is zero
-                final String selectedDate = day + "/" + (month+1) + "/" + year;
+                final String selectedDate = year + "-" + (month+1) + "-" + day;
                 txtValidate[3].setText(selectedDate);
             }
         });

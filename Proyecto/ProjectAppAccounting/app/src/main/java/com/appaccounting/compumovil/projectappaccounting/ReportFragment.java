@@ -58,7 +58,7 @@ public class ReportFragment extends Fragment {
         generarReporteGastos();
 
         //generarReporteIngresos
-        generarReporteIngresos();
+        generateReportN();
         /*pantalla2= (view.findViewById(R.id.pantallaReportGastos));
 
 
@@ -127,8 +127,46 @@ public class ReportFragment extends Fragment {
         Todos los metodos publicos que ayudan a personalizar el grafico se describen cada uno en la siguiente sección */
         pastel.SetColorDato(1,0,255,0);
         pastel.SetColorDato(2,255,0,0);
-        pastel.SetColorFondo(224,224,224);
+        pastel.SetColorFondo(255,255,255);
         pantalla.addView(pastel);
+    }
+
+    private void generateReportN(){
+        pantalla2= (view.findViewById(R.id.pantallaReportGastos));
+        pastel2=new PlotPastelito(context,"Reporte Ingresos por categoría");//puedes usar simplemente "this" en lugar de context
+        ArrayList<Entrie> arrayListDebits;
+        Entrie entrie;
+
+        float datapoints[] = {0,0,0};
+        String etiquetas[]= getActivity().getResources().getStringArray(R.array.categories_entries_array);
+
+        //float[] datapoints = {fIngresos, fGastos};
+        //String[] etiquetas={"Ingresos", "Gastos"};
+
+        if(dbh.hayEntries()){
+            for (int i = 1; i < 4; i++){
+                System.out.println("número de gasto "+i);
+                entrie = dbh.getEntrieByCategory(String.valueOf(i));
+                System.out.println("EL débito es "+entrie);
+                if (entrie.getAmount()==null){
+                    datapoints[i-1]= 0;
+                }else{
+                    datapoints[i-1]= entrie.getAmount().floatValue();
+                }
+            }
+        }
+
+
+        pastel2.SetDatos(datapoints,etiquetas);
+        pastel2.SetHD(true); //ajustamos la calidad hd que suaviza bordes del grafico. por default esta desactivado
+
+        /*antes de mostrar el grafico en pantalla(LinearLayout) deben de ir todos los ajustes "Set" del grafico.
+        Todos los metodos publicos que ayudan a personalizar el grafico se describen cada uno en la siguiente sección */
+        pastel2.SetColorDato(1,200,225,0);
+        pastel2.SetColorDato(2,10,180,100);
+        pastel2.SetColorDato(3,10,10,255);
+        pastel2.SetColorFondo(255,255,255);
+        pantalla2.addView(pastel2);
     }
 
     private void generarReporteGastos(){
@@ -158,16 +196,18 @@ public class ReportFragment extends Fragment {
         //personalizacion del grafico
         Columna.Columna(x,y);// OJO x e y DEBEN SER DEL MISMO TAMAÑO O CAUSARA QUE SE CIERRE LA APLICACION.
         Columna.SetHD(true);
+        //Columna.SetColorFondo(0.);
         //cambiemos el color del dato 3 o sea "44" rojo=255,verde=0,Azul=0 los ultimos tres enteros son los colores en rgb
         Columna.SetColorPila(2 ,200,0,120);//muestra el tercer dato en color rojo
         //mostrando en pantalla
-        Columna.SetColorFondo(224,224,224,0);
+        //Columna.SetColorFondo(1,224,224,224);
         //pantallaIngresos.removeAllViews();
+        pantallaIngresos.setBackgroundColor(255);
         pantallaIngresos.addView(Columna);
 
     }
 
-    private void generarReporteIngresos(){
+    /*private void generarReporteIngresos(){
         pantalla2= (view.findViewById(R.id.pantallaReportGastos));
         ArrayList<Entrie> arrayListEntries;
         Entrie entrie;
@@ -196,11 +236,12 @@ public class ReportFragment extends Fragment {
         //cambiemos el color del dato 3 o sea "44" rojo=255,verde=0,Azul=0 los ultimos tres enteros son los colores en rgb
         Columna.SetColorPila(2 ,200,0,120);//muestra el tercer dato en color rojo
         //mostrando en pantalla
-        Columna.SetColorFondo(224,224,224,0);
+        //Columna.SetColorFondo(2,224,224,224);
         //pantallaIngresos.removeAllViews();
+        pantalla2.setBackgroundColor(0);
         pantalla2.addView(Columna);
 
-    }
+    }*/
 
 
 }

@@ -30,16 +30,21 @@
                 android:layout_height="170dp"
                 android:gravity="bottom"
                 android:id="@+id/headerIngre"
-                android:background="@color/colorGreen"
                 android:layout_marginBottom="30dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ingresos"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/textViewIngre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Registrar Ingresos"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="#000000"
                     android:gravity="center_horizontal"
                     android:textSize="30dp"/>
             </LinearLayout>
@@ -115,7 +120,7 @@
                 android:textStyle="bold"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@drawable/rounded_green"
+                android:background="#90dfaa"
                 android:layout_marginTop="20dp" />
 
         </LinearLayout>

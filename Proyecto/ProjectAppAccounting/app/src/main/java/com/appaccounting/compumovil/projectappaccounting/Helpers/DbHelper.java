@@ -22,7 +22,10 @@ import com.appaccounting.compumovil.projectappaccounting.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -285,7 +288,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método para adicionar presupuesto
+     * Método para adicionar presupuesto2
      * @param budget
      * @param userID
      * @param categoryDebitID
@@ -376,7 +379,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método para verificar si hay presupuesto
+     * Método para verificar si hay presupuesto2
      * @return
      */
     public boolean hayBudgets(){
@@ -629,7 +632,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método para encontrar presupuesto por ID
+     * Método para encontrar presupuesto2 por ID
      * @param BudgetID
      * @return
      * @throws IOException
@@ -754,7 +757,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método para encontrar presupuesto por usuario
+     * Método para encontrar presupuesto2 por usuario
      * @return
      * @throws IOException
      */
@@ -1068,5 +1071,78 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         db.close();
         return entrie;
+    }
+
+
+    public Double validateBudgetByCategory(String category) throws ParseException {
+        Double amount = 0.0;
+        Budget budget = new Budget();
+        Debit debit = new Debit();
+        String selectQuery = "select * from " + BUDGET_TABLE + " where " +
+                COLUMN_CATEGORY_DEBIT + " = " + "'"+category+"'";
+        String selectQuery2 = "select * from " + DEBIT_TABLE + " where " +
+                COLUMN_CATEGORY_DEBIT + " = " + "'"+category+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery2, null);
+        Cursor cursor2 = db.rawQuery(selectQuery, null);
+
+        System.out.println("Cursor1 cantidad ="+cursor.getCount());
+        System.out.println("Cursor2 cantidad ="+cursor.getCount());
+
+        if (cursor.getCount() != 0 && cursor2.getCount() != 0) {
+            cursor.moveToFirst();
+            debit.setId(Integer.valueOf(cursor.getString(0)));
+            debit.setAmount(Double.valueOf(cursor.getString(1)));
+            debit.setDescription(cursor.getString(2));
+            debit.setDate(cursor.getString(5));
+            debit.setUserId(Integer.parseInt(cursor.getString(4)));
+            debit.setCategoryDebit(Integer.parseInt(cursor.getString(3)));
+
+            cursor2.moveToFirst();
+            budget.setId(Integer.valueOf(cursor2.getString(0)));
+            budget.setAmount(Double.valueOf(cursor2.getString(1)));
+            budget.setDescription(cursor2.getString(2));
+            budget.setStartDate(cursor2.getString(3));
+            budget.setEndDate(cursor2.getString(4));
+            budget.setUserId(Integer.parseInt(cursor2.getString(6)));
+            budget.setCategoryDebit(Integer.parseInt(cursor2.getString(5)));
+        }
+
+        if (debit.getDate()!=null && budget.getStartDate()!=null && budget.getEndDate()!=null){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //Para declarar valores en nuevos objetos date, usa el mismo formato date que usaste al crear las fechas
+            Date dateG = sdf.parse(debit.getDate()); //date1 es el 23 de febrero de 1995
+            Date dateIP = sdf.parse(budget.getStartDate()); //date2 es el 31 de octubre de 2001
+            Date dateEP = sdf.parse(budget.getEndDate()); //date3 es el 23 de febrero de 1995
+            if (dateG.compareTo(dateIP)>=0 && dateG.compareTo(dateEP)<=0){
+                amount = budget.getAmount();
+            }
+        }
+
+        return amount;
+    }
+
+
+    /**
+     * Método para traer todos los gastos
+     * @return
+     */
+    public ArrayList<Debit> getAllDebitsByCategory(String category){
+        ArrayList <Debit> debits = new ArrayList<>();
+        String selectQuery = "select " +COLUMN_ID+" from " + DEBIT_TABLE+ " where " +
+                COLUMN_CATEGORY_DEBIT + " = " + "'"+category+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                try {
+                    debits.add(getDebitByID(cursor.getString(0)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return debits;
     }
 }

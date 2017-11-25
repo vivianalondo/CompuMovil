@@ -30,19 +30,23 @@
                 android:layout_height="170dp"
                 android:gravity="bottom"
                 android:id="@+id/headerIngre"
-                android:background="@color/colorRed"
                 android:layout_marginBottom="30dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gastos"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/textViewGasto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Registrar Gasto"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="#000000"
                     android:gravity="center_horizontal"
-                    android:textSize="30dp"
-                    android:textStyle="bold"/>
+                    android:textSize="30dp"/>
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -115,7 +119,7 @@
                 android:textStyle="bold"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@drawable/rounded_red"
+                android:background="#e05b49"
                 android:layout_marginTop="20dp"
                 />
 

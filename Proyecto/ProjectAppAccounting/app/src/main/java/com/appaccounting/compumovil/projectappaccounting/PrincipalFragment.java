@@ -105,7 +105,7 @@ public class PrincipalFragment extends Fragment {
             for (int i = 0; i < budgets.size(); i++){
                 presupuesto = new Budget();
                 presupuesto = (Budget) budgets.get(i);
-                System.out.println("Valor del presupuesto "+ presupuesto.getAmount());
+                System.out.println("Valor del presupuesto2 "+ presupuesto.getAmount());
                 totalPresupuesto = totalPresupuesto + presupuesto.getAmount();
                 //itemsCategoryDebit.add(catdebit.getName());
             }

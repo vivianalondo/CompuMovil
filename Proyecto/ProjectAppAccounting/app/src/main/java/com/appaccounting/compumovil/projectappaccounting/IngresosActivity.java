@@ -131,8 +131,8 @@ public class IngresosActivity extends AppCompatActivity {
             };
 
     private void saveDate(int year, int month, int day) {
-        txtValidate[2].setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        txtValidate[2].setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
     }
 
 

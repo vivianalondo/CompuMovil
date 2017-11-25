@@ -30,16 +30,21 @@
                 android:layout_height="160dp"
                 android:gravity="bottom"
                 android:id="@+id/headerPre"
-                android:background="@color/colorBlue"
                 android:layout_marginBottom="20dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/presupuesto2"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/textViewPre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/regPresup"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="#000000"
                     android:gravity="center_horizontal"
                     android:textSize="30dp"/>
             </LinearLayout>
@@ -129,7 +134,7 @@
                 android:textStyle="bold"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@drawable/rounder_blue"
+                android:background="#5280d5"
                 android:layout_marginTop="20dp" />
 
         </LinearLayout>
