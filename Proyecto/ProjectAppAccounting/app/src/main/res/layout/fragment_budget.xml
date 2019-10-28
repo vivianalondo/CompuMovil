@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".budgetFragment"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:id="@+id/budget_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/imageBudget"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp">
+
+                        <TextView
+                            android:id="@+id/textNameB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="Pago servicios"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:layout_weight="0.44"/>
+
+                        <TextView
+                            android:id="@+id/textDescriptionB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="Pago servicios"
+                            android:textColor="@color/colorGreyOsc"
+                            android:textSize="14dp"
+                            android:layout_weight="0.44"/>
+
+                        <TextView
+                            android:id="@+id/textFechaInicioB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="10/10/10"
+                            android:textColor="@color/colorGreyOsc"
+                            android:textSize="14dp"
+                            android:layout_weight="0.44"/>
+
+                        <TextView
+                            android:id="@+id/textFechaFinB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="10/10/10"
+                            android:textColor="@color/colorGreyOsc"
+                            android:textSize="14dp"
+                            android:layout_weight="0.44"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/valorBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="$1,000.000.00"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.54" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textLinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="_____________________________________________________"
+            android:textColor="@color/colorGreyOsc"
+            android:textSize="14dp"/>
+
+
+</LinearLayout>

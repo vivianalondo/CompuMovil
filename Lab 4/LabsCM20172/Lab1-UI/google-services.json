@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "495608465972",
+    "firebase_url": "https://labcompumovilvl.firebaseio.com",
+    "project_id": "labcompumovilvl",
+    "storage_bucket": "labcompumovilvl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495608465972:android:43f8e546212d74c3",
+        "android_client_info": {
+          "package_name": "co.edu.udea.compumovil.gr06_20172.lab1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495608465972-kb0631i9ptf6hqh49psfmbop4eeab06t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.edu.udea.compumovil.gr06_20172.lab1",
+            "certificate_hash": "bee1f8fa0dfc5c0e4641a88af9c0bca11cb609fa"
+          }
+        },
+        {
+          "client_id": "495608465972-uga6o6t9tnf50g1akf4a2kh5mrdidqno.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCB3qKp1dw19ttXgJhJAuU2IyTKG5ue90"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495608465972-uga6o6t9tnf50g1akf4a2kh5mrdidqno.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

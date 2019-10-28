@@ -1,0 +1,783 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="udea.edu.co.app_accounting.PrincipalFragment"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:weightSum="1"
+    android:background="@color/colorGrey">
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollRegister" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/rounded_layout"
+        android:layout_marginBottom="20dp">
+
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textTodos"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_all"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Everybody"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaTodo"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaTodo"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoTodo"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoTodo"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalletod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textFood"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_restaurant"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Feeding"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaFood"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaFood"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoFood"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoFood"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textTranspor"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_transport"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Transport"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaTranspor"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaTranspor"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoTranspor"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoTranspor"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleTranspor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textEduc"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_education"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Education"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaEduc"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaEduc"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoEduc"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoEduc"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleEduc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textEntert"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_entertaiment"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Entertainment"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaEntert"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaEntert"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoEntert"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoEntert"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleEntert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textBills"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_facturass"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Bills"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaBills"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaBills"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoBills"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoBills"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleBills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounder_grey">
+
+            <TextView
+                android:id="@+id/textHome"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_home1"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Home"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/metaHome"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/Goal"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valMetaHome"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounder_grey">
+
+                <TextView
+                    android:id="@+id/gastoHome"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="@string/spending_value"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/valGastoHome"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="$500.000.00"
+                    android:textColor="@color/colorOscuro"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.66"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textDetalleHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/Details"
+                android:textColor="@color/colorOscuro"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_weight="0.44" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
